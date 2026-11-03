@@ -1,0 +1,234 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  # 配置 App Store Connect API Key（用于自动化操作）
+  before_all do
+    # 如果存在 API Key 文件，则使用它
+    if File.exist?("./fastlane/AuthKey_YOUR_KEY_ID.p8")
+      app_store_connect_api_key(
+        key_id: "YOUR_KEY_ID",
+        issuer_id: "YOUR_ISSUER_ID",
+        key_filepath: "./fastlane/AuthKey_YOUR_KEY_ID.p8"
+      )
+    end
+  end
+
+  # 测试 Lane
+  desc "Run tests"
+  lane :test do
+    run_tests(
+      scheme: "livesnap",
+      device: "iPhone 15 Pro",
+      code_coverage: true
+    )
+  end
+
+  # 构建 Lane
+  desc "Build the app"
+  lane :build do
+    increment_build_number(
+      xcodeproj: "livesnap.xcodeproj"
+    )
+    
+    build_app(
+      scheme: "livesnap",
+      export_method: "app-store",
+      skip_codesigning: false
+    )
+  end
+
+  # Beta 测试 Lane（TestFlight）
+  desc "Submit a new Beta Build to TestFlight"
+  lane :beta do
+    # 确保 App ID 存在（如果不存在则创建）
+    produce(
+      app_identifier: "com.example.livesnap",
+      app_name: "Livesnap",
+      skip_itc: false,  # 同时在 App Store Connect 中创建应用
+      skip_devcenter: false
+    )
+    
+    # 增加构建号
+    increment_build_number(
+      xcodeproj: "livesnap.xcodeproj"
+    )
+    
+    # 自动获取 App Store 分发所需的 provisioning profile
+    # 对于 App Store 分发，不设置 adhoc、development 或 developer_id
+    # 默认就是 App Store 类型
+    get_provisioning_profile(
+      app_identifier: "com.example.livesnap",
+      skip_install: false,
+      force: false
+    )
+    
+    # 构建应用（使用自动代码签名）
+    build_app(
+      scheme: "livesnap",
+      export_method: "app-store",
+      output_directory: "./build",
+      output_name: "livesnap.ipa",
+      skip_codesigning: false
+    )
+    
+    # 上传到 TestFlight
+    upload_to_testflight(
+      skip_waiting_for_build_processing: false,
+      skip_submission: true,
+      distribute_external: false,
+      notify_external_testers: false
+    )
+    
+    # 清理构建文件
+    clean_build_artifacts
+  end
+
+  # 发布到 App Store Lane
+  desc "Deploy a new version to the App Store"
+  lane :release do
+    # 确保在发布分支
+    ensure_git_branch(branch: "main")
+    ensure_git_status_clean
+    
+    # 确保 App ID 存在（如果不存在则创建）
+    produce(
+      app_identifier: "com.example.livesnap",
+      app_name: "Livesnap",
+      skip_itc: false,  # 同时在 App Store Connect 中创建应用
+      skip_devcenter: false
+    )
+    
+    # 增加版本号（可选，手动控制）
+    # increment_version_number(
+    #   version_number: "1.0.1",
+    #   xcodeproj: "livesnap.xcodeproj"
+    # )
+    
+    # 增加构建号
+    increment_build_number(
+      xcodeproj: "livesnap.xcodeproj"
+    )
+    
+    # 自动获取 App Store 分发所需的 provisioning profile
+    # 对于 App Store 分发，不设置 adhoc、development 或 developer_id
+    # 默认就是 App Store 类型
+    get_provisioning_profile(
+      app_identifier: "com.example.livesnap",
+      skip_install: false,
+      force: false
+    )
+    
+    # 构建应用（使用自动代码签名）
+    build_app(
+      scheme: "livesnap",
+      export_method: "app-store",
+      output_directory: "./build",
+      output_name: "livesnap.ipa",
+      skip_codesigning: false
+    )
+    
+    # 上传到 App Store Connect
+    upload_to_app_store(
+      skip_metadata: false,
+      skip_screenshots: false,
+      submit_for_review: false,
+      automatic_release: false,
+      force: false
+    )
+    
+    # 清理构建文件
+    clean_build_artifacts
+    
+    # 添加 git tag
+    add_git_tag(
+      tag: "v#{get_version_number(xcodeproj: "livesnap.xcodeproj")}-#{get_build_number(xcodeproj: "livesnap.xcodeproj")}"
+    )
+    
+    # 推送 git tags
+    push_git_tags
+  end
+
+  # 截图 Lane
+  desc "Generate screenshots"
+  lane :screenshots do
+    capture_screenshots(
+      scheme: "livesnap",
+      project: "livesnap.xcodeproj"
+    )
+  end
+
+  # 代码签名匹配 Lane（使用 match 管理证书和配置文件）
+  desc "Sync code signing using match"
+  lane :sync_certificates do
+    match(
+      type: "appstore",
+      app_identifier: "com.example.livesnap",
+      readonly: true
+    )
+  end
+
+  # 清理 Lane
+  desc "Clean build artifacts"
+  lane :clean do
+    clean_build_artifacts
+    sh("rm -rf ./build")
+    sh("rm -rf ./DerivedData")
+  end
+
+  # 验证配置 Lane
+  desc "Validate fastlane configuration"
+  lane :validate do
+    # 验证项目配置
+    xcodebuild(
+      project: "livesnap.xcodeproj",
+      scheme: "livesnap",
+      destination: "generic/platform=iOS",
+      clean: true,
+      build: false
+    )
+    
+    UI.success("✅ Fastlane configuration is valid!")
+    UI.success("✅ All lanes are available:")
+    UI.success("   - fastlane ios test")
+    UI.success("   - fastlane ios build")
+    UI.success("   - fastlane ios beta")
+    UI.success("   - fastlane ios release")
+    UI.success("   - fastlane ios screenshots")
+    UI.success("   - fastlane ios sync_certificates")
+    UI.success("   - fastlane ios clean")
+  end
+
+  # 自定义 Lane（保留原有功能）
+  desc "Custom lane"
+  lane :custom_lane do
+    if File.exist?("./fastlane/AuthKey_YOUR_KEY_ID.p8")
+      app_store_connect_api_key(
+        key_id: "YOUR_KEY_ID",
+        issuer_id: "YOUR_ISSUER_ID",
+        key_filepath: "./fastlane/AuthKey_YOUR_KEY_ID.p8"
+      )
+    end
+    # add actions here: https://docs.fastlane.tools/actions
+  end
+
+  # 错误处理
+  error do |lane, exception|
+    UI.error("❌ Fastlane error in lane #{lane}: #{exception.message}")
+    clean_build_artifacts
+  end
+end

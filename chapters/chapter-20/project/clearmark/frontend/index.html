@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClearMark - AI Watermark Removal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Environment Configuration -->
+    <meta name="supabase-url" content="https://your-project-ref.supabase.co">
+    <meta name="supabase-anon-key" content="your-supabase-anon-key">
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Environment loader -->
+    <script src="js/env.js"></script>
+    <script src="js/auth.js"></script>
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Reveal the Original</h1>
+            <p class="subtitle">AI-powered intelligent watermark removal, restore image authenticity with one click</p>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon"></div>
+                <h3 class="upload-title">Drag or click to upload image</h3>
+                <p class="upload-subtitle">Support JPG, PNG, WEBP formats, max 10MB</p>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;" multiple>
+                <button class="upload-button" onclick="document.getElementById('fileInput').click()">Choose File</button>
+            </div>
+        </div>
+
+        <!-- Process Section (Initially Hidden) -->
+        <div class="process-section" id="processSection" style="display: none;">
+            <!-- Mask Drawing Canvas -->
+            <div class="mask-canvas-container">
+                <canvas id="maskCanvas" class="mask-canvas"></canvas>
+            </div>
+            
+            <!-- Canvas Controls (below the canvas) -->
+            <div class="canvas-controls">
+                <button class="tool-btn active" id="drawBtn" onclick="switchMode('draw')">Draw</button>
+                <button class="tool-btn" id="eraseBtn" onclick="switchMode('erase')">Erase</button>
+                <button class="tool-btn" id="clearBtn" onclick="clearMask()">Clear</button>
+                <button class="tool-btn" id="undoBtn" onclick="undoMask()" title="Undo (Ctrl+Z)">Undo</button>
+                <button class="tool-btn" id="redoBtn" onclick="redoMask()" title="Redo (Ctrl+Y)">Redo</button>
+                <div class="brush-size">
+                    <label>Brush Size:</label>
+                    <input type="range" id="brushSize" min="5" max="100" value="20" onchange="updateBrushSize(this.value)">
+                    <span id="brushSizeValue">20</span>
+                </div>
+                <button class="btn btn-primary" onclick="processImage()" id="processBtn">Process Image</button>
+            </div>
+            
+            <!-- Process Status (Initially Hidden) -->
+            <div class="process-status-container" id="processStatusContainer" style="display: none;">
+                <div class="process-status" id="processStatus">
+                    <span class="status-dot"></span>
+                    <span>Ready to draw</span>
+                </div>
+            </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-bar" id="progressBar" style="display: none;">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <!-- Comparison View -->
+                <div class="compare-view" id="compareView" style="display: none;">
+                    <div class="image-container">
+                        <span class="image-label">Original</span>
+                        <img id="originalImage" src="" alt="Original">
+                    </div>
+                    <div class="image-container">
+                        <span class="image-label">Processed</span>
+                        <img id="processedImage" src="" alt="Processed">
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons" id="actionButtons" style="display: none;">
+                    <button class="btn btn-outline" onclick="resetUpload()">Upload Again</button>
+                    <button class="btn btn-primary" onclick="downloadImage()" id="downloadBtn">Download Image</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features">
+            <div class="features-container">
+                <h2 style="text-align: center; font-size: 36px; margin-bottom: 16px;">Why Choose ClearMark</h2>
+                <p style="text-align: center; color: var(--medium-gray); font-size: 18px; max-width: 600px; margin: 0 auto 48px;">Professional AI-powered watermark removal with enterprise-grade quality and consumer-friendly simplicity</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon-modern">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="24" cy="24" r="4" fill="currentColor"/>
+                                <path d="M24 4 L24 14" stroke="currentColor" stroke-width="2"/>
+                                <path d="M24 34 L24 44" stroke="currentColor" stroke-width="2"/>
+                                <path d="M4 24 L14 24" stroke="currentColor" stroke-width="2"/>
+                                <path d="M34 24 L44 24" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Precision Removal</h3>
+                        <p class="feature-description">Advanced LaMa inpainting model ensures pixel-perfect watermark removal while preserving original image details and textures</p>
+                        <div class="feature-stats">
+                            <span class="stat-badge">95% Success Rate</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-modern">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <path d="M12 24 L18 18 L24 24 L30 18 L36 24" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M12 30 L18 24 L24 30 L30 24 L36 30" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <circle cx="30" cy="12" r="3" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Lightning Fast</h3>
+                        <p class="feature-description">Cloud-based processing delivers results in under 3 seconds, with real-time progress tracking and instant preview</p>
+                        <div class="feature-stats">
+                            <span class="stat-badge">&lt;3s Processing</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-modern">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect x="6" y="6" width="36" height="36" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="18" cy="18" r="4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 36 L20 28 L28 36" stroke="currentColor" stroke-width="2"/>
+                                <path d="M24 32 L32 24 L40 32" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Smart Canvas</h3>
+                        <p class="feature-description">Interactive mask drawing with adjustable brush sizes, undo/redo support, and precise control over watermark regions</p>
+                        <div class="feature-stats">
+                            <span class="stat-badge">Intuitive UI</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-modern">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect x="14" y="20" width="20" height="20" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M20 20 V14 C20 10 24 8 28 10" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="24" cy="30" r="2" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Privacy First</h3>
+                        <p class="feature-description">Images are processed securely and automatically deleted after 24 hours. No data mining, no tracking, complete privacy</p>
+                        <div class="feature-stats">
+                            <span class="stat-badge">100% Secure</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-modern">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect x="8" y="12" width="14" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <rect x="26" y="12" width="14" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <rect x="8" y="34" width="14" height="6" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="26" y="34" width="14" height="6" rx="1" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Batch Processing</h3>
+                        <p class="feature-description">Upload and process multiple images simultaneously. API support for automating large-scale watermark removal tasks</p>
+                        <div class="feature-stats">
+                            <span class="stat-badge">Multi-file Support</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-modern">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <path d="M24 8 L28 20 L40 22 L32 30 L34 42 L24 36 L14 42 L16 30 L8 22 L20 20 Z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">High Quality Output</h3>
+                        <p class="feature-description">Maintains original resolution and quality. Supports JPG, PNG, WEBP formats with lossless compression options</p>
+                        <div class="feature-stats">
+                            <span class="stat-badge">Lossless Quality</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Features Section -->
+                <div class="additional-features">
+                    <h3 style="text-align: center; font-size: 28px; margin: 80px 0 40px;">Everything You Need</h3>
+                    <div class="feature-list-grid">
+                        <div class="feature-list-item">
+                            <span class="feature-check">✓</span>
+                            <div>
+                                <strong>No Watermarks Added</strong>
+                                <p>Your processed images stay clean - we never add our own watermarks</p>
+                            </div>
+                        </div>
+                        <div class="feature-list-item">
+                            <span class="feature-check">✓</span>
+                            <div>
+                                <strong>Multiple Format Support</strong>
+                                <p>Works with JPG, PNG, WEBP, and more image formats</p>
+                            </div>
+                        </div>
+                        <div class="feature-list-item">
+                            <span class="feature-check">✓</span>
+                            <div>
+                                <strong>Before/After Comparison</strong>
+                                <p>Side-by-side comparison to verify results before downloading</p>
+                            </div>
+                        </div>
+                        <div class="feature-list-item">
+                            <span class="feature-check">✓</span>
+                            <div>
+                                <strong>No Registration Required</strong>
+                                <p>Start removing watermarks immediately, no sign-up needed</p>
+                            </div>
+                        </div>
+                        <div class="feature-list-item">
+                            <span class="feature-check">✓</span>
+                            <div>
+                                <strong>Mobile Friendly</strong>
+                                <p>Works seamlessly on desktop, tablet, and mobile devices</p>
+                            </div>
+                        </div>
+                        <div class="feature-list-item">
+                            <span class="feature-check">✓</span>
+                            <div>
+                                <strong>API Access</strong>
+                                <p>Integrate watermark removal into your own applications</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/mask-drawer.js"></script>
+    <script src="js/watermark-removal.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+openapi: 3.0.0
+info:
+  title: Order Status Machine API
+  version: 1.0.0
+
+paths:
+  /orders/{id}:
+    get:
+      summary: Get order details
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Order not found
+
+  /orders/{id}/transitions:
+    post:
+      summary: Execute state transition
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [targetStatus]
+              properties:
+                targetStatus:
+                  type: string
+                  enum: [paid, cancelled, shipped, refunding, returning]
+                reason:
+                  type: string
+                  description: Required when transitioning to cancelled or refunding
+      responses:
+        '200':
+          description: Transition successful
+        '400':
+          description: Invalid transition
+        '404':
+          description: Order not found
+
+  /orders/{id}/history:
+    get:
+      summary: Get status change history
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Status history list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StatusHistory'
+
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum: [pending, paid, cancelled, shipped, delivered, refunding, returning, refunded, returned]
+        allowedTransitions:
+          type: array
+          items:
+            type: string
+
+    StatusHistory:
+      type: object
+      properties:
+        fromStatus:
+          type: string
+        toStatus:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        reason:
+          type: string
+        operator:
+          type: string

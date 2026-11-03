@@ -1,0 +1,55 @@
+{
+  "appId": "com.autosocialx.desktop",
+  "productName": "AutoSocialX",
+  "copyright": "Copyright © 2026 AutoSocialX",
+  "directories": {
+    "output": "release"
+  },
+  "files": [
+    "dist/**/*",
+    "dist-electron/**/*",
+    "package.json"
+  ],
+  "mac": {
+    "category": "public.app-category.productivity",
+    "target": [
+      { "target": "dmg", "arch": ["arm64", "x64"] }
+    ],
+    "darkModeSupport": true,
+    "hardenedRuntime": true,
+    "gatekeeperAssess": false
+  },
+  "dmg": {
+    "title": "${productName} ${version}",
+    "background": null,
+    "window": { "width": 540, "height": 380 },
+    "contents": [
+      { "x": 140, "y": 190, "type": "file" },
+      { "x": 400, "y": 190, "type": "link", "path": "/Applications" }
+    ]
+  },
+  "win": {
+    "target": [{ "target": "nsis" }]
+  },
+  "linux": {
+    "target": [{ "target": "AppImage" }],
+    "icon": "public/icon.png"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true
+  },
+  "extraResources": [
+    {
+      "from": "dist-electron/workers/browser_use_worker.py",
+      "to": "workers/browser_use_worker.py"
+    }
+  ],
+  "npmRebuild": false,
+  "buildDependenciesFromSource": false,
+  "nodeGypRebuild": false,
+  "asar": true,
+  "asarUnpack": [
+    "node_modules/better-sqlite3/**/*"
+  ]
+}

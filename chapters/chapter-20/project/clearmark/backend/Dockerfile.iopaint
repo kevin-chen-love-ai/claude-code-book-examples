@@ -1,0 +1,38 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    libffi-dev \
+    libgl1 \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install IOPaint
+RUN pip install --no-cache-dir iopaint
+
+# Set environment variables
+ENV MODEL=lama
+ENV DEVICE=cpu
+ENV PORT=8080
+ENV GRADIO_SERVER_NAME=0.0.0.0
+
+# Create directories
+RUN mkdir -p /app/uploads /app/processed
+
+# Expose port
+EXPOSE 8080
+
+# Copy startup script
+COPY start-iopaint.sh /app/start-iopaint.sh
+RUN chmod +x /app/start-iopaint.sh
+
+# Run IOPaint using startup script
+CMD ["/app/start-iopaint.sh"]
+

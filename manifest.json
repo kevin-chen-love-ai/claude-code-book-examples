@@ -1,0 +1,2575 @@
+{
+  "version": 2,
+  "files": [
+    {
+      "chapter": 1,
+      "kind": "source-copy",
+      "path": "chapters/chapter-01/source-files/.gitignore"
+    },
+    {
+      "chapter": 1,
+      "kind": "source-copy",
+      "path": "chapters/chapter-01/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 1,
+      "kind": "source-copy",
+      "path": "chapters/chapter-01/source-files/mvnw"
+    },
+    {
+      "chapter": 1,
+      "kind": "source-copy",
+      "path": "chapters/chapter-01/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 1,
+      "kind": "source-copy",
+      "path": "chapters/chapter-01/source-files/pom.xml"
+    },
+    {
+      "chapter": 1,
+      "kind": "source-copy",
+      "path": "chapters/chapter-01/source-files/src/main/java/com/example/auth/TokenService.java"
+    },
+    {
+      "chapter": 1,
+      "kind": "source-copy",
+      "path": "chapters/chapter-01/source-files/src/main/java/com/example/config/JpaConfig.java"
+    },
+    {
+      "chapter": 1,
+      "kind": "source-copy",
+      "path": "chapters/chapter-01/source-files/src/main/java/com/example/entity/User.java"
+    },
+    {
+      "chapter": 1,
+      "kind": "source-copy",
+      "path": "chapters/chapter-01/source-files/src/main/java/com/example/security/JwtAuthenticationFilter.java"
+    },
+    {
+      "chapter": 1,
+      "kind": "source-copy",
+      "path": "chapters/chapter-01/source-files/src/main/java/com/example/service/OrderService.java"
+    },
+    {
+      "chapter": 1,
+      "kind": "source-copy",
+      "path": "chapters/chapter-01/source-files/src/test/java/com/example/orders/OrderServiceTest.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/.gitignore"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/mvnw"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/pom.xml"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/java/com/example/config/LoggingFilter.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/java/com/example/config/RateLimitConfig.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/java/com/example/controller/DashboardController.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/java/com/example/controller/OrderController.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/java/com/example/controller/ProductController.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/java/com/example/controller/UserController.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/java/com/example/controller/UserProfileController.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/java/com/example/repository/OrderRepository.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/java/com/example/service/ExportService.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/java/com/example/service/OrderService.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/java/com/example/service/TokenService.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/java/com/example/service/UserService.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/java/com/example/util/DateUtil.java"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/resources/db/migration/V2__add_order_indexes.sql"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/resources/logback-spring.xml"
+    },
+    {
+      "chapter": 2,
+      "kind": "source-copy",
+      "path": "chapters/chapter-02/source-files/src/main/resources/schema.sql"
+    },
+    {
+      "chapter": 3,
+      "kind": "source-copy",
+      "path": "chapters/chapter-03/source-files/.gitignore"
+    },
+    {
+      "chapter": 3,
+      "kind": "source-copy",
+      "path": "chapters/chapter-03/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 3,
+      "kind": "source-copy",
+      "path": "chapters/chapter-03/source-files/mvnw"
+    },
+    {
+      "chapter": 3,
+      "kind": "source-copy",
+      "path": "chapters/chapter-03/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 3,
+      "kind": "source-copy",
+      "path": "chapters/chapter-03/source-files/pom.xml"
+    },
+    {
+      "chapter": 3,
+      "kind": "source-copy",
+      "path": "chapters/chapter-03/source-files/src/main/java/com/example/auth/TokenService.java"
+    },
+    {
+      "chapter": 3,
+      "kind": "source-copy",
+      "path": "chapters/chapter-03/source-files/src/main/java/com/example/config/DatabaseConfig.java"
+    },
+    {
+      "chapter": 3,
+      "kind": "source-copy",
+      "path": "chapters/chapter-03/source-files/src/main/java/com/example/controller/OrderController.java"
+    },
+    {
+      "chapter": 3,
+      "kind": "source-copy",
+      "path": "chapters/chapter-03/source-files/src/main/java/com/example/controller/ProductController.java"
+    },
+    {
+      "chapter": 3,
+      "kind": "source-copy",
+      "path": "chapters/chapter-03/source-files/src/main/java/com/example/security/JwtAuthenticationFilter.java"
+    },
+    {
+      "chapter": 3,
+      "kind": "source-copy",
+      "path": "chapters/chapter-03/source-files/src/main/java/com/example/service/ProductService.java"
+    },
+    {
+      "chapter": 3,
+      "kind": "source-copy",
+      "path": "chapters/chapter-03/source-files/src/test/java/com/example/controller/ProductControllerTest.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/.gitignore"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/mvnw"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/pom.xml"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/Application.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/auth/TokenService.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/config/DatabaseConfig.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/config/SecurityConfig.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/controller/OrderController.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/controller/ProductController.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/controller/UserController.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/controller/v1/OrderController.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/controller/v2/OrderController.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/service/EmailService.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/service/OrderService.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/service/ProductService.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/service/UserService.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/java/com/example/util/Helper.java"
+    },
+    {
+      "chapter": 4,
+      "kind": "source-copy",
+      "path": "chapters/chapter-04/source-files/src/main/resources/application.yml"
+    },
+    {
+      "chapter": 5,
+      "kind": "source-copy",
+      "path": "chapters/chapter-05/source-files/.claude/settings.json"
+    },
+    {
+      "chapter": 5,
+      "kind": "source-copy",
+      "path": "chapters/chapter-05/source-files/.gitignore"
+    },
+    {
+      "chapter": 5,
+      "kind": "source-copy",
+      "path": "chapters/chapter-05/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 5,
+      "kind": "source-copy",
+      "path": "chapters/chapter-05/source-files/mvnw"
+    },
+    {
+      "chapter": 5,
+      "kind": "source-copy",
+      "path": "chapters/chapter-05/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 5,
+      "kind": "source-copy",
+      "path": "chapters/chapter-05/source-files/pom.xml"
+    },
+    {
+      "chapter": 5,
+      "kind": "source-copy",
+      "path": "chapters/chapter-05/source-files/src/main/java/com/example/service/OrderService.java"
+    },
+    {
+      "chapter": 6,
+      "kind": "source-copy",
+      "path": "chapters/chapter-06/source-files/.gitignore"
+    },
+    {
+      "chapter": 6,
+      "kind": "source-copy",
+      "path": "chapters/chapter-06/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 6,
+      "kind": "source-copy",
+      "path": "chapters/chapter-06/source-files/mvnw"
+    },
+    {
+      "chapter": 6,
+      "kind": "source-copy",
+      "path": "chapters/chapter-06/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 6,
+      "kind": "source-copy",
+      "path": "chapters/chapter-06/source-files/pom.xml"
+    },
+    {
+      "chapter": 6,
+      "kind": "source-copy",
+      "path": "chapters/chapter-06/source-files/src/main/java/com/example/client/AuthClient.java"
+    },
+    {
+      "chapter": 6,
+      "kind": "source-copy",
+      "path": "chapters/chapter-06/source-files/src/main/java/com/example/repository/OrderRepository.java"
+    },
+    {
+      "chapter": 6,
+      "kind": "source-copy",
+      "path": "chapters/chapter-06/source-files/src/main/java/com/example/service/ActivityLogService.java"
+    },
+    {
+      "chapter": 6,
+      "kind": "source-copy",
+      "path": "chapters/chapter-06/source-files/src/main/java/com/example/service/AuthService.java"
+    },
+    {
+      "chapter": 6,
+      "kind": "source-copy",
+      "path": "chapters/chapter-06/source-files/src/main/java/com/example/service/OrderService.java"
+    },
+    {
+      "chapter": 6,
+      "kind": "source-copy",
+      "path": "chapters/chapter-06/source-files/src/main/java/com/example/service/UserService.java"
+    },
+    {
+      "chapter": 6,
+      "kind": "source-copy",
+      "path": "chapters/chapter-06/source-files/src/test/java/com/example/service/AuthServiceTest.java"
+    },
+    {
+      "chapter": 6,
+      "kind": "source-copy",
+      "path": "chapters/chapter-06/source-files/src/test/java/com/example/service/UserServiceTest.java"
+    },
+    {
+      "chapter": 7,
+      "kind": "source-copy",
+      "path": "chapters/chapter-07/source-files/.gitignore"
+    },
+    {
+      "chapter": 7,
+      "kind": "source-copy",
+      "path": "chapters/chapter-07/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 7,
+      "kind": "source-copy",
+      "path": "chapters/chapter-07/source-files/CLAUDE.md-templates/spring-boot-postgresql.md"
+    },
+    {
+      "chapter": 7,
+      "kind": "source-copy",
+      "path": "chapters/chapter-07/source-files/mvnw"
+    },
+    {
+      "chapter": 7,
+      "kind": "source-copy",
+      "path": "chapters/chapter-07/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 7,
+      "kind": "source-copy",
+      "path": "chapters/chapter-07/source-files/pom.xml"
+    },
+    {
+      "chapter": 7,
+      "kind": "source-copy",
+      "path": "chapters/chapter-07/source-files/src/main/java/com/example/config/WebMvcConfig.java"
+    },
+    {
+      "chapter": 7,
+      "kind": "source-copy",
+      "path": "chapters/chapter-07/source-files/src/test/java/com/example/service/UserServiceTest.java"
+    },
+    {
+      "chapter": 8,
+      "kind": "source-copy",
+      "path": "chapters/chapter-08/source-files/.gitignore"
+    },
+    {
+      "chapter": 8,
+      "kind": "source-copy",
+      "path": "chapters/chapter-08/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 8,
+      "kind": "source-copy",
+      "path": "chapters/chapter-08/source-files/mvnw"
+    },
+    {
+      "chapter": 8,
+      "kind": "source-copy",
+      "path": "chapters/chapter-08/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 8,
+      "kind": "source-copy",
+      "path": "chapters/chapter-08/source-files/pom.xml"
+    },
+    {
+      "chapter": 8,
+      "kind": "source-copy",
+      "path": "chapters/chapter-08/source-files/src/main/java/com/example/controller/AuthController.java"
+    },
+    {
+      "chapter": 8,
+      "kind": "source-copy",
+      "path": "chapters/chapter-08/source-files/src/main/java/com/example/controller/UserController.java"
+    },
+    {
+      "chapter": 8,
+      "kind": "source-copy",
+      "path": "chapters/chapter-08/source-files/src/main/java/com/example/filter/RateLimitFilter.java"
+    },
+    {
+      "chapter": 8,
+      "kind": "source-copy",
+      "path": "chapters/chapter-08/source-files/src/main/java/com/example/service/AuthService.java"
+    },
+    {
+      "chapter": 8,
+      "kind": "source-copy",
+      "path": "chapters/chapter-08/source-files/src/main/java/com/example/service/UserService.java"
+    },
+    {
+      "chapter": 9,
+      "kind": "source-copy",
+      "path": "chapters/chapter-09/source-files/.gitignore"
+    },
+    {
+      "chapter": 9,
+      "kind": "source-copy",
+      "path": "chapters/chapter-09/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 9,
+      "kind": "source-copy",
+      "path": "chapters/chapter-09/source-files/mvnw"
+    },
+    {
+      "chapter": 9,
+      "kind": "source-copy",
+      "path": "chapters/chapter-09/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 9,
+      "kind": "source-copy",
+      "path": "chapters/chapter-09/source-files/pom.xml"
+    },
+    {
+      "chapter": 9,
+      "kind": "source-copy",
+      "path": "chapters/chapter-09/source-files/src/main/java/com/example/config/SecurityConfig.java"
+    },
+    {
+      "chapter": 9,
+      "kind": "source-copy",
+      "path": "chapters/chapter-09/source-files/src/main/java/com/example/controller/UserController.java"
+    },
+    {
+      "chapter": 9,
+      "kind": "source-copy",
+      "path": "chapters/chapter-09/source-files/src/main/java/com/example/service/UserService.java"
+    },
+    {
+      "chapter": 10,
+      "kind": "source-copy",
+      "path": "chapters/chapter-10/source-files/.gitignore"
+    },
+    {
+      "chapter": 10,
+      "kind": "source-copy",
+      "path": "chapters/chapter-10/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 10,
+      "kind": "source-copy",
+      "path": "chapters/chapter-10/source-files/mvnw"
+    },
+    {
+      "chapter": 10,
+      "kind": "source-copy",
+      "path": "chapters/chapter-10/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 10,
+      "kind": "source-copy",
+      "path": "chapters/chapter-10/source-files/openapi/order-status-machine.yaml"
+    },
+    {
+      "chapter": 10,
+      "kind": "source-copy",
+      "path": "chapters/chapter-10/source-files/pom.xml"
+    },
+    {
+      "chapter": 10,
+      "kind": "source-copy",
+      "path": "chapters/chapter-10/source-files/src/main/java/com/example/security/JwtAuthenticationFilter.java"
+    },
+    {
+      "chapter": 10,
+      "kind": "source-copy",
+      "path": "chapters/chapter-10/source-files/src/main/java/com/example/util/JwtUtil.java"
+    },
+    {
+      "chapter": 12,
+      "kind": "source-copy",
+      "path": "chapters/chapter-12/source-files/.gitignore"
+    },
+    {
+      "chapter": 12,
+      "kind": "source-copy",
+      "path": "chapters/chapter-12/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 12,
+      "kind": "source-copy",
+      "path": "chapters/chapter-12/source-files/mvnw"
+    },
+    {
+      "chapter": 12,
+      "kind": "source-copy",
+      "path": "chapters/chapter-12/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 12,
+      "kind": "source-copy",
+      "path": "chapters/chapter-12/source-files/pom.xml"
+    },
+    {
+      "chapter": 12,
+      "kind": "source-copy",
+      "path": "chapters/chapter-12/source-files/src/main/java/com/example/service/CheckoutService.java"
+    },
+    {
+      "chapter": 12,
+      "kind": "source-copy",
+      "path": "chapters/chapter-12/source-files/src/main/java/com/example/service/OrderService.java"
+    },
+    {
+      "chapter": 12,
+      "kind": "source-copy",
+      "path": "chapters/chapter-12/source-files/src/main/java/com/example/service/UserService.java"
+    },
+    {
+      "chapter": 12,
+      "kind": "source-copy",
+      "path": "chapters/chapter-12/source-files/src/main/java/com/example/util/DateUtils.java"
+    },
+    {
+      "chapter": 12,
+      "kind": "source-copy",
+      "path": "chapters/chapter-12/source-files/src/test/java/com/example/service/CheckoutServiceTest.java"
+    },
+    {
+      "chapter": 12,
+      "kind": "source-copy",
+      "path": "chapters/chapter-12/source-files/src/test/java/com/example/service/OrderServiceTest.java"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/.gitignore"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/mvnw"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/pom.xml"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/src/main/java/com/example/cli/CsvTransformCli.java"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/src/main/java/com/example/payment/ReconciliationService.java"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/src/main/java/com/example/service/DiscountService.java"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/src/main/java/com/example/service/OrderService.java"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/src/main/java/com/example/util/ValidatePassword.java"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/src/main/resources/config-schema.yml"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/src/test/java/com/example/service/DiscountServiceTest.java"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/src/test/java/com/example/service/OrderServiceTest.java"
+    },
+    {
+      "chapter": 13,
+      "kind": "source-copy",
+      "path": "chapters/chapter-13/source-files/src/test/java/com/example/util/ValidatePasswordTest.java"
+    },
+    {
+      "chapter": 14,
+      "kind": "source-copy",
+      "path": "chapters/chapter-14/source-files/.claude/commands/check.md"
+    },
+    {
+      "chapter": 14,
+      "kind": "source-copy",
+      "path": "chapters/chapter-14/source-files/.claude/commands/commit.md"
+    },
+    {
+      "chapter": 14,
+      "kind": "source-copy",
+      "path": "chapters/chapter-14/source-files/.claude/commands/new-controller.md"
+    },
+    {
+      "chapter": 14,
+      "kind": "source-copy",
+      "path": "chapters/chapter-14/source-files/.claude/commands/pr.md"
+    },
+    {
+      "chapter": 14,
+      "kind": "source-copy",
+      "path": "chapters/chapter-14/source-files/.claude/commands/review.md"
+    },
+    {
+      "chapter": 14,
+      "kind": "source-copy",
+      "path": "chapters/chapter-14/source-files/.gitignore"
+    },
+    {
+      "chapter": 14,
+      "kind": "source-copy",
+      "path": "chapters/chapter-14/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 14,
+      "kind": "source-copy",
+      "path": "chapters/chapter-14/source-files/mvnw"
+    },
+    {
+      "chapter": 14,
+      "kind": "source-copy",
+      "path": "chapters/chapter-14/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 14,
+      "kind": "source-copy",
+      "path": "chapters/chapter-14/source-files/pom.xml"
+    },
+    {
+      "chapter": 14,
+      "kind": "source-copy",
+      "path": "chapters/chapter-14/source-files/src/main/java/com/example/filter/RateLimitFilter.java"
+    },
+    {
+      "chapter": 14,
+      "kind": "source-copy",
+      "path": "chapters/chapter-14/source-files/src/main/java/com/example/payment/ReconciliationService.java"
+    },
+    {
+      "chapter": 14,
+      "kind": "source-copy",
+      "path": "chapters/chapter-14/source-files/src/main/resources/config-schema.yml"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/.claude/hooks/api-doc-sync-reminder.sh"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/.claude/hooks/auto-test-on-change.sh"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/.claude/hooks/debug-hook.sh"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/.claude/hooks/format-check.sh"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/.claude/hooks/format-on-write.sh"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/.claude/hooks/graceful-error-handling.sh"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/.claude/hooks/protect-sensitive-files.sh"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/.claude/hooks/session-start-context.sh"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/.claude/hooks/sql-migration-check.sh"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/.claude/settings.json"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/.gitignore"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/mvnw"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 15,
+      "kind": "source-copy",
+      "path": "chapters/chapter-15/source-files/pom.xml"
+    },
+    {
+      "chapter": 16,
+      "kind": "source-copy",
+      "path": "chapters/chapter-16/source-files/.claude/mcp-settings.json"
+    },
+    {
+      "chapter": 16,
+      "kind": "source-copy",
+      "path": "chapters/chapter-16/source-files/.gitignore"
+    },
+    {
+      "chapter": 16,
+      "kind": "source-copy",
+      "path": "chapters/chapter-16/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 16,
+      "kind": "source-copy",
+      "path": "chapters/chapter-16/source-files/mvnw"
+    },
+    {
+      "chapter": 16,
+      "kind": "source-copy",
+      "path": "chapters/chapter-16/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 16,
+      "kind": "source-copy",
+      "path": "chapters/chapter-16/source-files/pom.xml"
+    },
+    {
+      "chapter": 16,
+      "kind": "source-copy",
+      "path": "chapters/chapter-16/source-files/src/main/java/com/example/mcp/OrderStatusMcpServer.java"
+    },
+    {
+      "chapter": 16,
+      "kind": "source-copy",
+      "path": "chapters/chapter-16/source-files/src/main/resources/sql/create-readonly-user.sql"
+    },
+    {
+      "chapter": 16,
+      "kind": "source-copy",
+      "path": "chapters/chapter-16/source-files/src/test/java/com/example/service/UserServiceTest.java"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/.claude/agent-handoff/impl-summary.json"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/.claude/commands/deploy.md"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/.claude/skills/deploy/SKILL.md"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/.claude/skills/review/SKILL.md"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/.gitignore"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/.mvn/wrapper/maven-wrapper.properties"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/mvnw"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/mvnw.cmd"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/pom.xml"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/src/main/java/com/example/Application.java"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/src/main/java/com/example/config/SecurityConfig.java"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/src/main/java/com/example/config/WebMvcConfig.java"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/src/main/java/com/example/controller/OrderController.java"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/src/main/java/com/example/controller/UserController.java"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/src/main/java/com/example/service/UserService.java"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/src/main/resources/db/migration/V2026__add_user_profile.sql"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/src/test/java/com/example/service/OrderServiceTest.java"
+    },
+    {
+      "chapter": 17,
+      "kind": "source-copy",
+      "path": "chapters/chapter-17/source-files/src/test/java/com/example/service/UserServiceTest.java"
+    },
+    {
+      "chapter": 18,
+      "kind": "project-copy",
+      "path": "chapters/chapter-18/project/autocover-cli/.gitignore"
+    },
+    {
+      "chapter": 18,
+      "kind": "project-copy",
+      "path": "chapters/chapter-18/project/autocover-cli/autocover_cli/__init__.py"
+    },
+    {
+      "chapter": 18,
+      "kind": "project-copy",
+      "path": "chapters/chapter-18/project/autocover-cli/autocover_cli/layout_templates.py"
+    },
+    {
+      "chapter": 18,
+      "kind": "project-copy",
+      "path": "chapters/chapter-18/project/autocover-cli/autocover_cli/main.py"
+    },
+    {
+      "chapter": 18,
+      "kind": "project-copy",
+      "path": "chapters/chapter-18/project/autocover-cli/autocover_cli/mcp_server.py"
+    },
+    {
+      "chapter": 18,
+      "kind": "project-copy",
+      "path": "chapters/chapter-18/project/autocover-cli/autocover_cli/render_pillow.py"
+    },
+    {
+      "chapter": 18,
+      "kind": "project-copy",
+      "path": "chapters/chapter-18/project/autocover-cli/autocover_cli/themes.py"
+    },
+    {
+      "chapter": 18,
+      "kind": "project-copy",
+      "path": "chapters/chapter-18/project/autocover-cli/batch_generate.py"
+    },
+    {
+      "chapter": 18,
+      "kind": "project-copy",
+      "path": "chapters/chapter-18/project/autocover-cli/examples/design_tool/参考文案.txt"
+    },
+    {
+      "chapter": 18,
+      "kind": "project-copy",
+      "path": "chapters/chapter-18/project/autocover-cli/pyproject.toml"
+    },
+    {
+      "chapter": 18,
+      "kind": "project-copy",
+      "path": "chapters/chapter-18/project/autocover-cli/requirements.txt"
+    },
+    {
+      "chapter": 18,
+      "kind": "project-copy",
+      "path": "chapters/chapter-18/project/autocover-cli/tests/test_api.py"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/Gemfile"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/Gemfile.lock"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/fastlane/.gitignore"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/fastlane/Appfile"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/fastlane/Deliverfile"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/fastlane/Fastfile"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/fastlane/Matchfile"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap.xcodeproj/project.pbxproj"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap.xcodeproj/project.xcworkspace/contents.xcworkspacedata"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/AppState.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Assets.xcassets/AccentColor.colorset/Contents.json"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Assets.xcassets/AppIcon.appiconset/Contents.json"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Assets.xcassets/AppIcon.appiconset/LiveSnap 1024x1024 Icon.png"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Assets.xcassets/Contents.json"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Config.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Services/HistoryManager.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Services/HistoryStore.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Services/LivePhotoComposer.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Services/MediaLibraryService.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Services/StorageManager.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Services/StoreKitManager.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Services/VideoProcessor.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Theme.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Utilities/Logger.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/BatchProcessingView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/BatchSelectionView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/Components/AppIconPreview.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/Components/BrandHeader.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/Components/MasonryLayout.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/Components/PremiumVisualComponents.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/Components/VisualComponents.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/ExportSuccessView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/GalleryHistoryView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/KeyFrameSelectorView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/LockPreviewView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/PremiumOnboardingView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/PrivacyPolicyView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/ProUpgradeView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/ProcessingView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/SettingsView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/SplashScreenView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/TermsOfServiceView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/TimelineSelectorView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/VideoEditorView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/Views/VideoSelectionView.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnap/livesnapApp.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnapTests/AppStateTests.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnapTests/HistoryStoreTests.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnapTests/StorageManagerTests.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnapTests/VideoProcessorTests.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnapTests/livesnapTests.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnapUITests/AccessibilityUITests.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnapUITests/CompleteFlowUITests.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnapUITests/LivePhotoCreationUITests.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnapUITests/livesnapUITests.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/livesnapUITests/livesnapUITestsLaunchTests.swift"
+    },
+    {
+      "chapter": 19,
+      "kind": "project-copy",
+      "path": "chapters/chapter-19/project/livesnap/付费功能配置说明.md"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/.gitignore"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/Caddyfile"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/README.md"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/architecture.md"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/.dockerignore"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/Dockerfile.backend"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/Dockerfile.iopaint"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/Dockerfile.proxy"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/__init__.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/api/__init__.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/api/dependencies.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/api/routes/__init__.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/api/routes/auth.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/api/routes/health.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/api/routes/posts.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/api/routes/remove_background.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/db/__init__.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/db/connection.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/db/session.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/iopaint-proxy.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/local-db-init.sql"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/main.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/models/__init__.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/models/base.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/models/post.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/models/profile.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/models/task.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/models/usage_stat.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/repository/__init__.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/repository/post_repository.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/repository/profile_repository.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/requirements.txt"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/schemas/__init__.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/schemas/auth.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/schemas/base.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/schemas/post.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/scripts/init_admin.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/scripts/init_posts.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/scripts/make_admin.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/service/__init__.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/service/auth_service.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/service/post_service.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/start-iopaint.sh"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/start.sh"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/supabase-migrations.sql"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/utils/__init__.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/utils/exceptions.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/backend/utils/security.py"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/docker-compose.yml"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/docs/SUPABASE_INIT_STEPS.md"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/.dockerignore"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/Dockerfile.frontend"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/about.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/admin.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/blog.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/components/footer.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/components/header.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/css/admin.css"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/css/profile-layout.css"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/css/profile-styles.css"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/css/styles.css"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/email-confirm.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/favicon.ico"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/favicon.svg"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/index.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/js/auth.js"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/js/blog.js"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/js/common.js"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/js/env.js"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/js/mask-drawer.js"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/js/object-removal.js"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/js/remove-background.js"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/js/watermark-removal.js"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/login.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/object-removal.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/post.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/privacy-policy.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/profile.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/register.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/frontend/remove-background.html"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/scripts/start.sh"
+    },
+    {
+      "chapter": 20,
+      "kind": "project-copy",
+      "path": "chapters/chapter-20/project/clearmark/scripts/test/test-full.sh"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/.github/ISSUE_TEMPLATE/bug_report.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/.github/ISSUE_TEMPLATE/feature_request.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/.github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/.github/workflows/ci.yml"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/.gitignore"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/CODE_OF_CONDUCT.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/CONTRIBUTING.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/LICENSE"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/README.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/README_zh.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/.gitignore"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron-builder.json"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/index.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/llm-gateway.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/memory/embedding-service.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/memory/episodic-memory.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/memory/knowledge-store.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/memory/rss-store.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/memory/rss-vector-store.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/memory/semantic-memory.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/memory/working-memory.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/message-bus.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/queue.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/react-engine.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/security.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/skill-use/registry.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/tool-use/builtin/browser-do.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/tool-use/builtin/image-gen.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/tool-use/builtin/load-skill.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/tool-use/builtin/memory-recall.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/tool-use/builtin/read-url.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/tool-use/builtin/rss-reader.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/tool-use/builtin/run-code.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/tool-use/builtin/schedule-post.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/tool-use/builtin/web-search.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/tool-use/campaign-context.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/tool-use/executor.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/tool-use/registry.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/tool-use/tool-keys.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-core/types.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agent-logger.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agents/content-scheduler.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agents/persona.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agents/publisher.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agents/registry.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agents/rss-sync.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/agents/scheduler.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/config-store.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/automation-store.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/campaign-store.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/channel-store.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/client.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/content-store.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrate.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrations/001_initial.sql"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrations/002_unify_architecture.sql"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrations/003_fix_fk_references.sql"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrations/004_add_agent_provider.sql"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrations/004_rss_items.sql"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrations/005_campaigns_extend.sql"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrations/006_campaigns_cron.sql"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrations/007_agent_runs_episodic.sql"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrations/008_decouple_agents_campaigns.sql"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrations/009_unify_channels.sql"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrations/010_agent_runs_no_fk.sql"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrations/011_seed_demo.sql"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/db/migrations/012_reseed_campaigns_content.sql"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/electron-migrate.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/main.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/mcp/config.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/mcp/mcp-client.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/mcp/mcp-registry.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/preload.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/skills/brand_voice_adapter/SKILL.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/skills/content_calendar_planner/SKILL.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/skills/generate_image_prompt/SKILL.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/skills/generate_linkedin_article/SKILL.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/skills/generate_x_thread/SKILL.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/skills/generate_xhs_post/SKILL.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/skills/hashtag_analyze/SKILL.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/skills/sentiment_scan/SKILL.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/skills/translate/SKILL.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/skills/trending_topic_analyzer/SKILL.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/skills/video_script_writer/SKILL.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/skills/viral_hook_writer/SKILL.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/workers/browser-use-worker.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/workers/playwright-worker.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/workers/rpc.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/electron/workers/worker-bridge.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/eslint.config.mjs"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/index.html"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/package.json"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/public/icon.png"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/App.css"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/App.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/assets/react.svg"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/components/Badge.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/components/Button.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/components/Card.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/components/ChartTooltip.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/components/CreatePersonaModal.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/components/Icon.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/components/PlatformIcon.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/components/PlatformPreviewCard.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/components/ProgressBar.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/components/TerminalLog.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/components/tokens.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/data/mock.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/data/skillTemplates.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/hooks/useCountUp.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/hooks/useElectronAPI.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/i18n.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/index.css"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/locales/en.json"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/locales/zh-CN.json"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/main.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/pages/AgentsPage.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/pages/AnalyticsPage.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/pages/AutomationPage.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/pages/CampaignsPage.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/pages/ChannelsPage.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/pages/ContentPage.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/pages/DashboardPage.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/pages/GeneratePage.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/pages/PersonasPage.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/pages/SettingsPage.tsx"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/store/agentIpc.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/store/agents.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/store/queueStatus.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/store/terminal.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/store/ui.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/types/electron.d.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/src/types/index.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/tsconfig.app.json"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/tsconfig.json"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/tsconfig.node.json"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/desktop/vite.config.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/apps/python/browser_use_worker.py"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/design/autosocialx.png"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/docs/ARCHITECTURE.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/docs/logo.svg"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/docs/publish API.md"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/package.json"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/ai/package.json"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/ai/src/index.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/core/package.json"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/core/src/index.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/package.json"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/base-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/bilibili-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/bluesky-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/douyin-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/facebook-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/instagram-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/linkedin-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/pinterest-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/threads-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/tiktok-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/weibo-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/x-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/xhs-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/adapters/youtube-adapter.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/packages/plugins/src/index.ts"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/pnpm-lock.yaml"
+    },
+    {
+      "chapter": 21,
+      "kind": "project-copy",
+      "path": "chapters/chapter-21/project/autosocialx/pnpm-workspace.yaml"
+    }
+  ]
+}

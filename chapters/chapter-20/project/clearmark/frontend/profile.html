@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - ClearMark</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/profile-layout.css">
+    <link rel="stylesheet" href="css/profile-styles.css">
+    <style>
+        .posts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .post-item {
+            padding: 20px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .post-item:hover {
+            border-color: var(--black);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .post-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .post-item-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            flex: 1;
+            margin: 0;
+        }
+
+        .post-status {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .post-status.published {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .post-status.draft {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .post-item-meta {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--medium-gray);
+        }
+
+        .post-item-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+    </style>
+    <!-- Environment Configuration -->
+    <meta name="supabase-url" content="https://your-project-ref.supabase.co">
+    <meta name="supabase-anon-key" content="your-supabase-anon-key">
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Environment loader -->
+    <script src="js/env.js"></script>
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Profile Layout -->
+    <div class="profile-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="profile-sidebar">
+            <nav>
+                <ul class="profile-sidebar-nav">
+                    <li class="sidebar-nav-item">
+                        <a href="#profile" class="sidebar-nav-link active" data-section="profile">
+                            <svg class="sidebar-nav-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="8" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M3 14C3 11.5 5.5 10 8 10C10.5 10 13 11.5 13 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-item" id="myPostsNavItem" style="display: none;">
+                        <a href="#posts" class="sidebar-nav-link" data-section="posts">
+                            <svg class="sidebar-nav-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="2" width="12" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M5 6H11M5 9H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            <span>My Posts</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="profile-content-wrapper">
+            <div class="profile-main-content">
+                <!-- Profile Section -->
+                <div id="profile-section" class="profile-section active">
+                    <div class="profile-section-header">
+                        <h2>Profile</h2>
+                        <p>Manage your personal information</p>
+                    </div>
+
+                    <!-- Loading State -->
+                    <div id="profileLoading" class="profile-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading profile information...</p>
+                    </div>
+
+                    <!-- Profile Card (hidden until loaded) -->
+                    <div id="profileCard" class="profile-card" style="display: none;">
+                        <div class="profile-avatar">
+                            <div class="avatar-circle" id="avatarCircle">
+                                <span id="avatarInitials">U</span>
+                            </div>
+                        </div>
+                        <div class="profile-info">
+                            <h2 id="userName">User</h2>
+                            <p id="userEmail" class="user-email">email@example.com</p>
+                            <p id="userProvider" class="user-provider">Logged in with email</p>
+                            <p id="userCreated" class="user-created" style="display: none;"></p>
+                        </div>
+                    </div>
+
+                    <div class="profile-details">
+                        <div class="detail-section">
+                            <h3>Account Information</h3>
+                            <div class="detail-item">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" id="fullName" class="detail-input" placeholder="Enter your full name">
+                            </div>
+                            <div class="detail-item">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" class="detail-input" readonly>
+                            </div>
+                            <button id="saveProfileBtn" class="btn btn-primary">Save Changes</button>
+                            <p id="profileMessage" class="auth-message" style="display: none;"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-details">
+                        <div class="detail-section">
+                            <h3>Change Password</h3>
+                            <form id="changePasswordForm">
+                                <div class="detail-item">
+                                    <label for="currentPassword">Current Password</label>
+                                    <input type="password" id="currentPassword" class="detail-input" placeholder="Enter current password" required>
+                                </div>
+                                <div class="detail-item">
+                                    <label for="newPassword">New Password</label>
+                                    <input type="password" id="newPassword" class="detail-input" placeholder="Enter new password (min 8 characters)" minlength="8" required>
+                                </div>
+                                <div class="detail-item">
+                                    <label for="confirmNewPassword">Confirm New Password</label>
+                                    <input type="password" id="confirmNewPassword" class="detail-input" placeholder="Confirm new password" required>
+                                </div>
+                                <button type="submit" id="changePasswordBtn" class="btn btn-primary">Change Password</button>
+                                <p id="passwordMessage" class="auth-message" style="display: none;"></p>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="profile-details">
+                        <div class="detail-section">
+                            <h3>Account Actions</h3>
+                            <button id="logoutBtn" class="btn btn-outline">Sign Out</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Posts Section (only for admins) -->
+                <div id="posts-section" class="profile-section">
+                    <div class="profile-section-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h2>My Posts</h2>
+                            <p>Manage your blog posts</p>
+                        </div>
+                        <a href="admin.html" class="btn btn-primary">Add New Post</a>
+                    </div>
+
+                    <div id="myPostsList" class="posts-list">
+                        <p>Loading your posts...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/blog.js"></script>
+    <script>
+        // Use supabaseClient from auth.js (already declared there)
+        // Do NOT redeclare it here
+        // Use API_URL from blog.js (already declared there) - access via window.API_URL
+        let isAdmin = false;
+        
+        // API_URL is declared in blog.js and set on window.API_URL
+        // Use window.API_URL directly to avoid redeclaration
+        // Don't declare const API_URL here - use window.API_URL in all fetch calls
+
+        // Use initSupabaseClient from auth.js (already declared there)
+        // This function will use the global supabaseClient from auth.js
+
+        // Check if user is admin
+        async function checkIsAdmin() {
+            // Use global supabaseClient from auth.js (declared in auth.js scope)
+            // We need to access it through a function or wait for it
+            if (typeof initSupabaseClient === 'function') {
+                initSupabaseClient();
+            }
+            
+            // Wait for supabaseClient to be available (from auth.js)
+            // Since supabaseClient is in auth.js scope, we access it via window or directly
+            // Check if authManager has supabaseClient
+            let client = null;
+            if (window.authManager && window.authManager.supabaseClient) {
+                client = window.authManager.supabaseClient;
+            } else {
+                // Try to get from global scope (auth.js exports it)
+                // Wait a bit for it to initialize
+                for (let i = 0; i < 20; i++) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    if (window.authManager && window.authManager.supabaseClient) {
+                        client = window.authManager.supabaseClient;
+                        break;
+                    }
+                }
+            }
+            
+            if (!client) return false;
+            
+            try {
+                // Try to get admin status from user metadata
+                const { data: { user } } = await client.auth.getUser();
+                if (!user) return false;
+
+                // Check user_metadata for is_admin (Supabase way)
+                if (user.user_metadata?.is_admin === true || 
+                    user.user_metadata?.is_admin === 'true') {
+                    return true;
+                }
+
+                // For local database, check via API
+                try {
+                    const token = await window.authManager?.getAccessToken();
+                    if (token) {
+                        const response = await fetch(`${window.API_URL || 'http://localhost:8000'}/api/auth/me`, {
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        });
+                        if (response.ok) {
+                            const userInfo = await response.json();
+                            // Check if user_metadata contains is_admin
+                            if (userInfo.user_metadata?.is_admin === true || 
+                                userInfo.user_metadata?.is_admin === 'true') {
+                                return true;
+                            }
+                        }
+                    }
+                } catch (error) {
+                    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                        console.warn('Could not check admin status via API:', error);
+                    }
+                }
+
+                return false;
+            } catch (error) {
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    console.error('Error checking admin status:', error);
+                }
+                return false;
+            }
+        }
+
+        // Check authentication
+        async function checkAuth() {
+            // Only log in development
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.log('Checking authentication...');
+            }
+            
+            // Try Supabase first (via authManager)
+            let supabaseClientForAuth = null;
+            if (window.authManager && window.authManager.supabaseClient) {
+                supabaseClientForAuth = window.authManager.supabaseClient;
+            }
+            
+            if (supabaseClientForAuth) {
+                try {
+                    const { data: { session }, error } = await supabaseClientForAuth.auth.getSession();
+                    if (session && session.user && !error) {
+                        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                            console.log('Authenticated via Supabase');
+                        }
+                        return true;
+                    } else if (error) {
+                        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                            console.error('Supabase session error:', error);
+                        }
+                    }
+                } catch (error) {
+                    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                        console.error('Error checking Supabase session:', error);
+                    }
+                }
+            }
+
+            // Try authManager
+            if (window.authManager) {
+                try {
+                    await window.authManager.init();
+                    if (window.authManager.currentUser) {
+                        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                            console.log('Authenticated via AuthManager');
+                        }
+                        return true;
+                    }
+                } catch (error) {
+                    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                        console.error('Error checking AuthManager:', error);
+                    }
+                }
+            }
+
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.log('Not authenticated, redirecting to login');
+            }
+            window.location.href = 'login.html?message=Please log in to view your profile';
+            return false;
+        }
+
+        // Load user profile
+        async function loadProfile() {
+            const loadingEl = document.getElementById('profileLoading');
+            const profileCard = document.getElementById('profileCard');
+            
+            try {
+                // Show loading
+                if (loadingEl) loadingEl.style.display = 'block';
+                if (profileCard) profileCard.style.display = 'none';
+
+                // Wait for authManager to be initialized
+                let authManager = window.authManager;
+                if (!authManager) {
+                    console.log('AuthManager not initialized, waiting...');
+                    // Try to initialize
+                    if (typeof window.initAuthManager === 'function') {
+                        window.initAuthManager();
+                    }
+                    
+                    // Wait up to 5 seconds for authManager to be ready
+                    for (let i = 0; i < 50; i++) {
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                        authManager = window.authManager;
+                        if (authManager) {
+                            console.log('AuthManager initialized');
+                            break;
+                        }
+                    }
+                }
+
+                if (!authManager) {
+                    throw new Error('AuthManager could not be initialized');
+                }
+
+                // Get access token
+                let token = null;
+                try {
+                    token = await authManager.getAccessToken();
+                    // Only log token status in development, never log actual token
+                    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                        console.log('Token from authManager:', token ? '✅ Available' : '❌ Not available');
+                    }
+                } catch (e) {
+                    // Only log errors in development
+                    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                        console.error('Error getting access token:', e);
+                    }
+                }
+
+                // If no token from authManager, try Supabase directly
+                let supabaseClientForToken = null;
+                if (window.authManager && window.authManager.supabaseClient) {
+                    supabaseClientForToken = window.authManager.supabaseClient;
+                }
+                
+                if (!token && supabaseClientForToken) {
+                    try {
+                        const { data: { session }, error } = await supabaseClientForToken.auth.getSession();
+                        if (error) {
+                            // Only log in development
+                            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                                console.error('Supabase session error:', error);
+                            }
+                        } else if (session) {
+                            token = session.access_token || null;
+                            // Only log status in development, never log actual token
+                            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                                console.log('Token from Supabase directly:', token ? '✅ Available' : '❌ Not available');
+                            }
+                        } else {
+                            // Only log in development
+                            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                                console.warn('No session found in Supabase');
+                            }
+                        }
+                    } catch (e) {
+                        // Only log in development
+                        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                            console.error('Error getting token from Supabase:', e);
+                        }
+                    }
+                }
+
+                if (!token) {
+                    // Only log in development
+                    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                        console.log('No auth token available, redirecting to login');
+                    }
+                    window.location.href = 'login.html?message=Please log in to view your profile';
+                    return;
+                }
+
+                // Call backend API to get user info
+                const apiUrl = window.API_URL || 'http://localhost:8000';
+                // Only log API endpoint in development
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    console.log('Calling API: /api/auth/me');
+                }
+                const response = await fetch(`${apiUrl}/api/auth/me`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                console.log('API Response status:', response.status);
+
+                if (!response.ok) {
+                    const errorText = await response.text().catch(() => 'Unknown error');
+                    console.error('API Error:', response.status, errorText);
+                    throw new Error(`Failed to load profile: ${response.status} ${response.statusText}`);
+                }
+
+                const user = await response.json();
+                const fullName = user.user_metadata?.full_name || '';
+                const email = user.email || '';
+                const provider = user.user_metadata?.provider || 'email';
+                const userId = user.id || '';
+
+                // Update profile card
+                document.getElementById('userName').textContent = fullName || email || 'User';
+                document.getElementById('userEmail').textContent = email;
+                
+                // Set provider text based on login method
+                let providerText = 'Logged in with Email';
+                let providerIcon = '✉️';
+                if (provider === 'google') {
+                    providerText = 'Logged in with Google';
+                    providerIcon = '🔵';
+                } else if (provider === 'github') {
+                    providerText = 'Logged in with GitHub';
+                    providerIcon = '⚫';
+                }
+                document.getElementById('userProvider').textContent = `${providerIcon} ${providerText}`;
+                
+                // Set avatar initials
+                const displayName = fullName || email || 'User';
+                const initials = displayName.split(' ').map(n => n.charAt(0).toUpperCase()).slice(0, 2).join('') || displayName.charAt(0).toUpperCase();
+                document.getElementById('avatarInitials').textContent = initials;
+                
+                // Update form fields
+                document.getElementById('fullName').value = fullName;
+                document.getElementById('email').value = email;
+
+                // Show created date if available (from Supabase user)
+                let supabaseClientForDate = null;
+                if (window.authManager && window.authManager.supabaseClient) {
+                    supabaseClientForDate = window.authManager.supabaseClient;
+                }
+                
+                if (supabaseClientForDate) {
+                    try {
+                        const { data: { user: supabaseUser } } = await supabaseClientForDate.auth.getUser();
+                        if (supabaseUser && supabaseUser.created_at) {
+                            const createdDate = new Date(supabaseUser.created_at);
+                            const createdEl = document.getElementById('userCreated');
+                            if (createdEl) {
+                                createdEl.textContent = `Member since ${createdDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`;
+                                createdEl.style.display = 'block';
+                            }
+                        }
+                    } catch (e) {
+                        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                            console.log('Could not get created date:', e);
+                        }
+                    }
+                }
+
+                // Hide change password section for OAuth users (they don't have passwords)
+                const changePasswordSection = document.querySelector('.profile-details:nth-of-type(2)');
+                if (changePasswordSection && (provider === 'google' || provider === 'github')) {
+                    changePasswordSection.style.display = 'none';
+                } else if (changePasswordSection) {
+                    changePasswordSection.style.display = 'block';
+                }
+
+                // Hide loading, show profile card
+                if (loadingEl) loadingEl.style.display = 'none';
+                if (profileCard) profileCard.style.display = 'flex';
+            } catch (error) {
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    console.error('Error loading profile:', error);
+                }
+                
+                // Hide loading, show error
+                if (loadingEl) {
+                    loadingEl.innerHTML = `
+                        <div class="loading-spinner" style="border-top-color: var(--error);"></div>
+                        <p style="color: var(--error);">Error loading profile: ${error.message || 'Unknown error'}</p>
+                        <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 16px;">Retry</button>
+                    `;
+                }
+                if (profileCard) {
+                    profileCard.style.display = 'flex';
+                    const userName = document.getElementById('userName');
+                    userName.textContent = `Error: ${error.message || 'Failed to load profile'}`;
+                    userName.style.color = 'var(--error)';
+                }
+            }
+        }
+
+        // Save profile
+        async function saveProfile() {
+            const fullNameInput = document.getElementById('fullName');
+            const fullName = fullNameInput.value.trim();
+            const messageEl = document.getElementById('profileMessage');
+            const btn = document.getElementById('saveProfileBtn');
+
+            // Validate input
+            if (!fullName) {
+                messageEl.className = 'auth-message error';
+                messageEl.textContent = 'Full name cannot be empty';
+                messageEl.style.display = 'block';
+                fullNameInput.focus();
+                return;
+            }
+
+            // Check if value changed
+            const currentName = document.getElementById('userName').textContent;
+            if (fullName === currentName) {
+                messageEl.className = 'auth-message info';
+                messageEl.textContent = 'No changes to save';
+                messageEl.style.display = 'block';
+                setTimeout(() => {
+                    messageEl.style.display = 'none';
+                }, 2000);
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+            messageEl.style.display = 'none';
+
+            try {
+                // Get access token
+                const token = await window.authManager?.getAccessToken();
+                if (!token) throw new Error('Not authenticated');
+
+                // Call backend API to update profile
+                const apiUrl = window.API_URL || 'http://localhost:8000';
+                const response = await fetch(`${apiUrl}/api/auth/update-profile`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        full_name: fullName
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ detail: response.statusText }));
+                    throw new Error(errorData.detail || 'Failed to update profile');
+                }
+
+                const updatedUser = await response.json();
+
+                messageEl.className = 'auth-message success';
+                messageEl.textContent = 'Profile updated successfully!';
+                messageEl.style.display = 'block';
+
+                // Update avatar initials immediately
+                const displayName = fullName || updatedUser.email || 'User';
+                const initials = displayName.split(' ').map(n => n.charAt(0).toUpperCase()).slice(0, 2).join('') || displayName.charAt(0).toUpperCase();
+                document.getElementById('avatarInitials').textContent = initials;
+
+                // Reload profile and update header
+                setTimeout(() => {
+                    messageEl.style.display = 'none';
+                    loadProfile();
+                    if (window.updateUserStatus) {
+                        setTimeout(() => updateUserStatus(), 500);
+                    }
+                }, 2000);
+            } catch (error) {
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    console.error('Save profile error:', error);
+                }
+                messageEl.className = 'auth-message error';
+                messageEl.textContent = error.message || 'Failed to update profile';
+                messageEl.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Save Changes';
+            }
+        }
+
+        // Change password
+        async function changePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+            const messageEl = document.getElementById('passwordMessage');
+            const btn = document.getElementById('changePasswordBtn');
+
+            // Validate
+            if (!currentPassword || !newPassword || !confirmNewPassword) {
+                messageEl.className = 'auth-message error';
+                messageEl.textContent = 'Please fill in all fields';
+                messageEl.style.display = 'block';
+                return;
+            }
+
+            if (newPassword.length < 8) {
+                messageEl.className = 'auth-message error';
+                messageEl.textContent = 'New password must be at least 8 characters';
+                messageEl.style.display = 'block';
+                return;
+            }
+
+            if (newPassword !== confirmNewPassword) {
+                messageEl.className = 'auth-message error';
+                messageEl.textContent = 'New passwords do not match';
+                messageEl.style.display = 'block';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Changing...';
+
+            try {
+                const token = await window.authManager?.getAccessToken();
+                if (!token) throw new Error('Not authenticated');
+
+                const apiUrl = window.API_URL || 'http://localhost:8000';
+                const response = await fetch(`${apiUrl}/api/auth/change-password`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        current_password: currentPassword,
+                        new_password: newPassword
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Failed to change password');
+                }
+
+                messageEl.className = 'auth-message success';
+                messageEl.textContent = 'Password changed successfully!';
+                messageEl.style.display = 'block';
+
+                // Clear form
+                document.getElementById('changePasswordForm').reset();
+            } catch (error) {
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    console.error('Change password error:', error);
+                }
+                messageEl.className = 'auth-message error';
+                messageEl.textContent = error.message || 'Failed to change password';
+                messageEl.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Change Password';
+            }
+        }
+
+        // Load my posts
+        async function loadMyPosts() {
+            const listEl = document.getElementById('myPostsList');
+            try {
+                const token = await window.authManager?.getAccessToken();
+                if (!token) {
+                    listEl.innerHTML = '<p>Please log in to view your posts.</p>';
+                    return;
+                }
+
+                // Get current user ID
+                const apiUrl = window.API_URL || 'http://localhost:8000';
+                const userResponse = await fetch(`${apiUrl}/api/auth/me`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!userResponse.ok) throw new Error('Failed to get user info');
+                const user = await userResponse.json();
+                const userId = user.id;
+
+                // Get posts for current user (both published and unpublished)
+                const response = await fetch(`${apiUrl}/api/posts?published=false&author_id=${userId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) throw new Error('Failed to load posts');
+
+                const posts = await response.json();
+                if (posts.length === 0) {
+                    listEl.innerHTML = '<p>You haven\'t created any posts yet. <a href="admin.html" class="btn btn-primary" style="display: inline-block; margin-top: 12px;">Create one now</a></p>';
+                    return;
+                }
+
+                listEl.innerHTML = posts.map(post => `
+                    <div class="post-item" data-post-id="${post.id}">
+                        <div class="post-item-header">
+                            <h3>${escapeHtml(post.title)}</h3>
+                            <span class="post-status ${post.published ? 'published' : 'draft'}">${post.published ? 'Published' : 'Draft'}</span>
+                        </div>
+                        <div class="post-item-meta">
+                            <span>Created: ${new Date(post.created_at).toLocaleDateString()}</span>
+                            ${post.updated_at && post.updated_at !== post.created_at ? `<span>Updated: ${new Date(post.updated_at).toLocaleDateString()}</span>` : ''}
+                        </div>
+                        <div class="post-item-actions">
+                            <a href="admin.html#edit-${post.id}" class="btn btn-sm btn-primary">Edit</a>
+                            <button class="btn btn-sm btn-error" onclick="deleteMyPost('${post.id}')">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    console.error('Error loading posts:', error);
+                }
+                listEl.innerHTML = '<p class="error">Failed to load posts</p>';
+            }
+        }
+
+        // Delete post from My Posts section
+        window.deleteMyPost = async function(postId) {
+            if (!confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
+                return;
+            }
+
+            try {
+                const token = await window.authManager?.getAccessToken();
+                if (!token) {
+                    alert('Please log in to delete posts');
+                    return;
+                }
+
+                const apiUrl = window.API_URL || 'http://localhost:8000';
+                const response = await fetch(`${apiUrl}/api/posts/${postId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ detail: 'Unknown error' }));
+                    throw new Error(errorData.detail || 'Failed to delete post');
+                }
+
+                // Remove the post item from the list with animation
+                const postItem = document.querySelector(`[data-post-id="${postId}"]`);
+                if (postItem) {
+                    postItem.style.transition = 'opacity 0.3s, transform 0.3s';
+                    postItem.style.opacity = '0';
+                    postItem.style.transform = 'translateX(-20px)';
+                    setTimeout(() => {
+                        postItem.remove();
+
+                        // Check if list is empty
+                        const listEl = document.getElementById('myPostsList');
+                        if (listEl.children.length === 0) {
+                            listEl.innerHTML = '<p>You haven\'t created any posts yet. <a href="admin.html" class="btn btn-primary" style="display: inline-block; margin-top: 12px;">Create one now</a></p>';
+                        }
+                    }, 300);
+                }
+
+                // Show success message
+                const listEl = document.getElementById('myPostsList');
+                const successMsg = document.createElement('div');
+                successMsg.className = 'success-message';
+                successMsg.textContent = 'Post deleted successfully!';
+                successMsg.style.cssText = 'padding: 12px; background: #D1FAE5; color: #065F46; border-radius: 6px; margin-bottom: 16px;';
+                listEl.insertBefore(successMsg, listEl.firstChild);
+
+                setTimeout(() => {
+                    if (successMsg.parentNode) {
+                        successMsg.remove();
+                    }
+                }, 3000);
+            } catch (error) {
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    console.error('Error deleting post:', error);
+                }
+                alert(`Failed to delete post: ${error.message}`);
+            }
+        }
+
+        // Helper function to escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Switch sections
+        function switchSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.profile-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            const section = document.getElementById(sectionId + '-section');
+            if (section) {
+                section.classList.add('active');
+            }
+
+            // Update nav links
+            document.querySelectorAll('.sidebar-nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+
+            // Load section-specific data
+            if (sectionId === 'posts') {
+                loadMyPosts();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Initialize Supabase and authManager first
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.log('Initializing profile page...');
+            }
+            
+            // Initialize auth manager (this will also initialize Supabase client)
+            if (typeof window.initAuthManager === 'function') {
+                window.initAuthManager();
+            } else {
+                // Wait for auth.js to load
+                let retries = 0;
+                while (typeof window.initAuthManager !== 'function' && retries < 20) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    retries++;
+                }
+                if (typeof window.initAuthManager === 'function') {
+                    window.initAuthManager();
+                }
+            }
+            
+            // Also initialize Supabase client if function exists
+            if (typeof initSupabaseClient === 'function') {
+                initSupabaseClient();
+            }
+
+            // Wait for authManager to be ready
+            let retries = 0;
+            while (!window.authManager && retries < 30) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                retries++;
+            }
+
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.log('AuthManager ready:', !!window.authManager);
+            }
+
+            const isAuth = await checkAuth();
+            if (isAuth) {
+                // Check if user is admin
+                isAdmin = await checkIsAdmin();
+                
+                // Show/hide My Posts menu item based on admin status
+                const myPostsNavItem = document.getElementById('myPostsNavItem');
+                if (myPostsNavItem) {
+                    myPostsNavItem.style.display = isAdmin ? 'block' : 'none';
+                }
+
+                // Load profile after a short delay to ensure everything is ready
+                setTimeout(() => {
+                    loadProfile();
+                }, 200);
+
+                // Section navigation
+                document.querySelectorAll('.sidebar-nav-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const section = link.getAttribute('data-section');
+                        switchSection(section);
+                    });
+                });
+
+                // Event listeners
+                document.getElementById('saveProfileBtn').addEventListener('click', saveProfile);
+
+                // Change password form
+                const changePasswordForm = document.getElementById('changePasswordForm');
+                if (changePasswordForm) {
+                    changePasswordForm.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        await changePassword();
+                    });
+                }
+
+                // Logout button - bind event listener
+                const logoutBtn = document.getElementById('logoutBtn');
+                if (logoutBtn) {
+                    console.log('✅ Logout button found, binding event listener');
+                    logoutBtn.addEventListener('click', async (event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        console.log('🔵 Logout button clicked');
+
+                        // Show confirmation
+                        if (!confirm('Are you sure you want to sign out?')) {
+                            console.log('❌ Logout cancelled by user');
+                            return;
+                        }
+
+                        logoutBtn.disabled = true;
+                        logoutBtn.textContent = 'Signing out...';
+
+                        try {
+                            console.log('🔄 Starting logout process...');
+
+                            // Wait for authManager to be available
+                            let authMgr = window.authManager;
+                            if (!authMgr) {
+                                console.log('⏳ Waiting for authManager...');
+                                // Wait up to 2 seconds for authManager
+                                for (let i = 0; i < 20; i++) {
+                                    await new Promise(resolve => setTimeout(resolve, 100));
+                                    authMgr = window.authManager;
+                                    if (authMgr) {
+                                        console.log('✅ AuthManager found');
+                                        break;
+                                    }
+                                }
+                            }
+
+                            // Logout using authManager if available
+                            if (authMgr && typeof authMgr.logout === 'function') {
+                                console.log('🔵 Using authManager.logout()');
+                                const result = await authMgr.logout();
+                                if (!result.success && result.error) {
+                                    console.warn('⚠️ AuthManager logout returned error:', result.error);
+                                } else {
+                                    console.log('✅ AuthManager logout successful');
+                                }
+                            } else {
+                                // Fallback: logout from Supabase directly
+                                console.warn('⚠️ AuthManager not available, using direct Supabase logout');
+
+                                let supabaseClientForLogout = null;
+                                if (authMgr && authMgr.supabaseClient) {
+                                    supabaseClientForLogout = authMgr.supabaseClient;
+                                }
+
+                                if (supabaseClientForLogout) {
+                                    console.log('🔵 Calling Supabase signOut()');
+                                    await supabaseClientForLogout.auth.signOut();
+                                    console.log('✅ Supabase signOut() completed');
+                                }
+                            }
+
+                            // Clear local storage (all Supabase auth keys)
+                            try {
+                                const keysToRemove = [];
+                                for (let i = 0; i < localStorage.length; i++) {
+                                    const key = localStorage.key(i);
+                                    if (key && key.startsWith('sb-')) {
+                                        keysToRemove.push(key);
+                                    }
+                                }
+                                console.log(`🗑️ Clearing ${keysToRemove.length} localStorage keys`);
+                                keysToRemove.forEach(key => localStorage.removeItem(key));
+                            } catch (e) {
+                                console.error('❌ Could not clear localStorage:', e);
+                            }
+
+                            // Redirect to home page
+                            console.log('➡️ Redirecting to home page');
+                            window.location.href = 'index.html?message=You have been signed out successfully';
+                        } catch (error) {
+                            console.error('❌ Logout error:', error);
+                            alert(`Logout failed: ${error.message}`);
+                            // Still redirect even if logout fails to ensure user is "logged out" from UI
+                            window.location.href = 'index.html';
+                        } finally {
+                            logoutBtn.disabled = false;
+                            logoutBtn.textContent = 'Sign Out';
+                        }
+                    });
+                } else {
+                    console.error('❌ Logout button NOT found!');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

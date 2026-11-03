@@ -1,0 +1,21 @@
+<svg width="520" height="100" viewBox="0 0 520 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Wordmark: AutoSocialX — whale brand colors -->
+  <text x="260" y="68" text-anchor="middle"
+    font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',system-ui,sans-serif"
+    font-size="52" letter-spacing="-2">
+    <tspan font-weight="800" fill="#1C3D6E">Auto</tspan><tspan font-weight="800" fill="#3B87C4">Social</tspan><tspan font-weight="900" fill="#7DC8EE">X</tspan>
+  </text>
+
+  <!-- Spout accent mark above X -->
+  <ellipse cx="395" cy="8" rx="5" ry="7" fill="#7DC8EE" opacity="0.6"/>
+  <ellipse cx="403" cy="4" rx="3.5" ry="5" fill="#7DC8EE" opacity="0.4"/>
+  <ellipse cx="387" cy="5" rx="3" ry="4" fill="#7DC8EE" opacity="0.35"/>
+
+  <!-- Tagline -->
+  <text x="260" y="92" text-anchor="middle"
+    font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',system-ui,sans-serif"
+    font-size="13" font-weight="400" letter-spacing="0.3"
+    fill="#7BA4C8">AI-native social media automation · 13+ platforms</text>
+
+</svg>

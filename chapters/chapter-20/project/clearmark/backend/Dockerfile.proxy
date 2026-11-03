@@ -1,0 +1,26 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install dependencies
+RUN pip install --no-cache-dir \
+    flask==3.0.0 \
+    flask-cors==4.0.0 \
+    requests==2.31.0 \
+    Pillow==10.1.0 \
+    numpy==1.24.3
+
+# Copy proxy code
+COPY iopaint-proxy.py .
+
+# Expose port
+EXPOSE 5001
+
+# Run proxy
+CMD ["python3", "iopaint-proxy.py", "5001"]
+

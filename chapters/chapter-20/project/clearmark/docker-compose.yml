@@ -1,0 +1,158 @@
+services:
+  # Frontend (Caddy for static files)
+  # Note: No volume mount for /usr/share/caddy/html - files are copied into image during build
+  # This ensures the container uses the built static files, not empty local directory
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    container_name: clearmark-frontend
+    restart: unless-stopped
+    # Removed volume mount: - ./frontend:/usr/share/caddy/html
+    # Files are already in the image from Dockerfile COPY command
+    ports:
+      - "3000:80"
+    networks:
+      - clearmark-network
+
+  # Backend API (FastAPI)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    container_name: clearmark-backend
+    restart: unless-stopped
+    environment:
+      # Supabase configuration (from codebase)
+      # Database connection string - using pooler connection (recommended, more stable)
+      # Direct connection: postgresql://db-user:your-db-password@db-host:5432/db-name
+      # Pooler connection (Transaction mode, port 6543): postgresql://db-user:your-db-password@db-host:5432/db-name
+      # Pooler connection (Session mode, port 5432): postgresql://db-user:your-db-password@db-host:5432/db-name
+      # Note: SUPABASE_DATABASE_URL takes precedence, then use Supabase default (ignore .env DATABASE_URL for local postgres)
+      # Using pooler connection (Transaction mode) for better stability and performance
+      - DATABASE_URL=${SUPABASE_DATABASE_URL:-postgresql://db-user:your-db-password@db-host:5432/db-name}
+      # Supabase project URL (from README.md and frontend config)
+      - SUPABASE_URL=${SUPABASE_URL:-https://your-project-ref.supabase.co}
+      # Supabase anon key (from README.md and frontend config)
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY:-your-supabase-anon-key}
+      # Supabase service key (from README.md)
+      - SUPABASE_SERVICE_KEY=${SUPABASE_SERVICE_KEY:-your-supabase-service-role-key}
+      - SUPABASE_JWT_SECRET=${SUPABASE_JWT_SECRET:-}
+      - USE_LOCAL_DB=false
+      # IOPaint configuration
+      # Backend should access IOPaint through iopaint-proxy
+      # iopaint-proxy shares network with iopaint, so access via iopaint:5001
+      # (iopaint-proxy port is exposed through iopaint container)
+      - IOPAINT_URL=http://iopaint:5001
+      # Security
+      - SECRET_KEY=${SECRET_KEY:-your-secret-key-here}
+      - ALGORITHM=HS256
+    volumes:
+      # Removed code volume mount: - ./backend:/app
+      # Code is already in the image from Dockerfile COPY command
+      # Only keep data volumes
+      - ./uploads:/app/uploads
+      - ./processed:/app/processed
+    ports:
+      - "8000:8000"
+    # Use startup script to install rembg and start server
+    command: /app/start.sh
+    # Note: Using Supabase for database, no need to depend on local postgres
+    # depends_on:
+    #   - postgres
+    networks:
+      - clearmark-network
+
+  # IOPaint Service
+  iopaint:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.iopaint
+    container_name: clearmark-iopaint
+    restart: unless-stopped
+    environment:
+      - MODEL=lama
+      - DEVICE=cpu
+      - PORT=8080
+      - GRADIO_SERVER_NAME=0.0.0.0
+    command: sh -c "GRADIO_SERVER_NAME=0.0.0.0 iopaint start --model ${MODEL:-lama} --device ${DEVICE:-cpu} --port ${PORT:-8080}"
+    volumes:
+      - iopaint-models:/root/.cache
+      - ./uploads:/app/uploads
+      - ./processed:/app/processed
+    ports:
+      - "8080:8080"  # IOPaint service
+      - "5001:5001"  # Proxy service (shared network)
+    networks:
+      - clearmark-network
+    shm_size: '2gb'
+
+  # IOPaint Proxy
+  # Share network with IOPaint so it can access 127.0.0.1:8080
+  iopaint-proxy:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.proxy
+    container_name: clearmark-proxy
+    restart: unless-stopped
+    network_mode: "service:iopaint"
+    environment:
+      # Use localhost since we share network with IOPaint
+      - IOPAINT_URL=http://127.0.0.1:8080
+    # Removed code volume mount: - ./backend/iopaint-proxy.py:/app/iopaint-proxy.py
+    # Code is already in the image from Dockerfile COPY command
+    depends_on:
+      - iopaint
+    # Ports are exposed through iopaint service (see iopaint ports section)
+
+  # PostgreSQL database
+  postgres:
+    image: postgres:15-alpine
+    container_name: clearmark-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-clearmark}
+      POSTGRES_USER: ${POSTGRES_USER:-clearmark}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./backend/local-db-init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    networks:
+      - clearmark-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-clearmark}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Caddy for HTTPS and reverse proxy
+  caddy:
+    image: caddy:2-alpine
+    container_name: clearmark-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - frontend
+      - backend
+      - iopaint-proxy
+    networks:
+      - clearmark-network
+
+volumes:
+  iopaint-models:
+  postgres-data:
+  caddy-data:
+  caddy-config:
+
+networks:
+  clearmark-network:
+    driver: bridge

@@ -1,0 +1,66 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+dist-electron/
+dist-ssr/
+release/
+*.local
+
+# Electron runtime data (user data, not committed)
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+*.egg-info/
+
+# Test artifacts
+test-*.db
+test-*.ts
+
+# Misc
+bak/
+preview/
+*.zip
+electron-v*.zip
+download.js
+mask_icon.js
+electron-crypto-test.js
+AutoSocialX_Mac_UI*.jsx
+AutoSocialX_Technical_Architecture.txt
+产品方案_AutoSocialX.md
+技术方案_AutoSocialX.md

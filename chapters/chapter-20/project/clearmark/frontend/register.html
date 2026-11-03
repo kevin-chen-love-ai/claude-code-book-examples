@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - ClearMark</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Environment Configuration (must be before Supabase JS) -->
+    <meta name="supabase-url" content="https://your-project-ref.supabase.co">
+    <meta name="supabase-anon-key" content="your-supabase-anon-key">
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Environment loader (must load after meta tags) -->
+    <script src="js/env.js"></script>
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-logo">
+                    <div class="logo-icon" style="width: 48px; height: 48px;"></div>
+                </div>
+                <h2 class="login-title">Create Account</h2>
+                <p class="login-subtitle">Sign up to start using ClearMark</p>
+
+                <!-- Error/Success Messages -->
+                <div id="authMessage" class="auth-message" style="display: none;"></div>
+
+                <!-- Registration Form -->
+                <form id="registerForm" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" id="registerName" class="form-input" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" id="registerEmail" class="form-input" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="registerPassword" class="form-input" placeholder="••••••••" required minlength="6">
+                        <small style="color: var(--medium-gray); font-size: 12px; display: block; margin-top: 4px;">Password must be at least 6 characters</small>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" id="registerPasswordConfirm" class="form-input" placeholder="••••••••" required minlength="6">
+                    </div>
+                    <div class="form-checkbox">
+                        <input type="checkbox" class="checkbox" id="agreeTerms" required>
+                        <label for="agreeTerms" style="font-size: 14px;">
+                            I agree to the <a href="#" style="color: var(--primary-color);">Terms of Service</a> and <a href="#" style="color: var(--primary-color);">Privacy Policy</a>
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-full">Sign Up</button>
+                    </div>
+                </form>
+
+                <div class="divider">OR</div>
+
+                <!-- Social Login -->
+                <div class="social-login">
+                    <button class="social-btn" onclick="handleGoogleLogin()">
+                        <svg width="20" height="20" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        <span>Continue with Google</span>
+                    </button>
+                    <button class="social-btn" onclick="handleGitHubLogin()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="#24292e">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span>Continue with GitHub</span>
+                    </button>
+                </div>
+
+                <p class="login-footer">
+                    Already have an account? <a href="login.html">Sign in here</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Initialize auth manager - wait for env.js and auth.js to load
+        async function initAuth() {
+            // Wait for env.js to load environment variables
+            if (!window.env || (!window.env.SUPABASE_URL && !document.querySelector('meta[name="supabase-url"]'))) {
+                setTimeout(initAuth, 100);
+                return;
+            }
+            
+            // Re-initialize Supabase client if needed
+            if (typeof initSupabaseClient === 'function') {
+                initSupabaseClient();
+            }
+            
+            // Wait for auth.js to load
+            if (typeof authManager === 'undefined') {
+                setTimeout(initAuth, 100);
+                return;
+            }
+
+            // Check if user is already logged in
+            if (authManager.isAuthenticated()) {
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Handle registration
+        async function handleRegister(event) {
+            event.preventDefault();
+            
+            const fullName = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+            const messageEl = document.getElementById('authMessage');
+            
+            messageEl.style.display = 'none';
+            
+            // Validate passwords match
+            if (password !== passwordConfirm) {
+                messageEl.className = 'auth-message error';
+                messageEl.textContent = 'Passwords do not match.';
+                messageEl.style.display = 'block';
+                return;
+            }
+            
+            // Validate password length
+            if (password.length < 6) {
+                messageEl.className = 'auth-message error';
+                messageEl.textContent = 'Password must be at least 6 characters long.';
+                messageEl.style.display = 'block';
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Creating account...';
+            
+            try {
+                // Ensure auth manager is initialized
+                if (typeof window.initAuthManager === 'function') {
+                    window.initAuthManager();
+                }
+                
+                // Wait for auth manager if not ready
+                let authMgr = window.authManager;
+                if (!authMgr) {
+                    // Wait a bit for authManager to initialize
+                    for (let i = 0; i < 10; i++) {
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                        authMgr = window.authManager;
+                        if (authMgr) break;
+                    }
+                }
+                
+                // Try using Supabase auth if available
+                if (authMgr && authMgr.register) {
+                    const result = await authMgr.register(email, password, fullName);
+                    
+                    if (result.success) {
+                        if (result.needsEmailConfirmation || (!result.session && result.user === null)) {
+                            // Email confirmation required - redirect to email confirm page
+                            window.location.href = 'email-confirm.html?email=' + encodeURIComponent(email);
+                        } else if (result.session) {
+                            // Email confirmation disabled, user is logged in automatically
+                            messageEl.className = 'auth-message success';
+                            messageEl.textContent = 'Account created successfully! Redirecting...';
+                            messageEl.style.display = 'block';
+                            
+                            setTimeout(() => {
+                                window.location.href = 'index.html';
+                            }, 1000);
+                        } else {
+                            // User created but needs confirmation
+                            messageEl.className = 'auth-message success';
+                            messageEl.style.display = 'block';
+                            messageEl.innerHTML = '✅ Account created successfully!<br><br>' +
+                                'Please check your email to confirm your account before logging in.';
+                            
+                            setTimeout(() => {
+                                window.location.href = 'login.html?message=Please check your email to confirm your account.';
+                            }, 4000);
+                        }
+                    } else {
+                        messageEl.className = 'auth-message error';
+                        messageEl.textContent = result.error || 'Registration failed. Please try again.';
+                        messageEl.style.display = 'block';
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalText;
+                    }
+                } else {
+                    // Fallback: Use backend API
+                    const response = await fetch('http://127.0.0.1:8000/api/auth/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            password: password,
+                            full_name: fullName
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        messageEl.className = 'auth-message success';
+                        messageEl.textContent = 'Account created successfully! Redirecting...';
+                        messageEl.style.display = 'block';
+                        
+                        // Save token
+                        if (data.access_token) {
+                            localStorage.setItem('access_token', data.access_token);
+                        }
+                        
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 1000);
+                    } else {
+                        messageEl.className = 'auth-message error';
+                        messageEl.textContent = data.detail || 'Registration failed. Please try again.';
+                        messageEl.style.display = 'block';
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalText;
+                    }
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                messageEl.className = 'auth-message error';
+                messageEl.textContent = 'An error occurred. Please try again.';
+                messageEl.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        }
+
+        // Handle Google login
+        async function handleGoogleLogin() {
+            if (typeof authManager !== 'undefined' && authManager.loginWithGoogle) {
+                const result = await authManager.loginWithGoogle();
+                if (result.success && result.url) {
+                    window.location.href = result.url;
+                } else {
+                    const messageEl = document.getElementById('authMessage');
+                    messageEl.className = 'auth-message error';
+                    messageEl.textContent = result.error || 'Google login failed. Please try again.';
+                    messageEl.style.display = 'block';
+                }
+            }
+        }
+
+        // Handle GitHub login
+        async function handleGitHubLogin() {
+            if (typeof authManager !== 'undefined' && authManager.loginWithGitHub) {
+                const result = await authManager.loginWithGitHub();
+                if (result.success && result.url) {
+                    window.location.href = result.url;
+                } else {
+                    const messageEl = document.getElementById('authMessage');
+                    messageEl.className = 'auth-message error';
+                    messageEl.textContent = result.error || 'GitHub login failed. Please try again.';
+                    messageEl.style.display = 'block';
+                }
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initAuth);
+    </script>
+</body>
+</html>
+

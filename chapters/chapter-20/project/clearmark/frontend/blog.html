@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - ClearMark</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Environment Configuration -->
+    <meta name="supabase-url" content="https://your-project-ref.supabase.co">
+    <meta name="supabase-anon-key" content="your-supabase-anon-key">
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Environment loader -->
+    <script src="js/env.js"></script>
+    <script src="js/auth.js?v=2"></script>
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="blog-hero">
+            <h1>ClearMark Blog</h1>
+            <p>Discover use cases, latest features, and product updates from ClearMark</p>
+        </div>
+
+        <div class="blog-content">
+            <div class="blog-filters">
+                <span class="filter-tag active" data-filter="all">All</span>
+                <span class="filter-tag" data-filter="tutorials">Tutorials</span>
+                <span class="filter-tag" data-filter="product-updates">Product Updates</span>
+                <span class="filter-tag" data-filter="case-studies">Case Studies</span>
+                <span class="filter-tag" data-filter="ai-research">AI Research</span>
+            </div>
+
+            <div id="blog-grid" class="blog-grid">
+                <div class="loading-message">Loading posts...</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Markdown renderer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/blog.js?v=3"></script>
+    <script>
+        // Use API_URL from blog.js (already defined)
+        let allPosts = [];
+        let currentFilter = 'all';
+
+        // Calculate read time from content
+        function calculateReadTime(content) {
+            const wordCount = content.split(/\s+/).length;
+            const readTime = Math.max(1, Math.round(wordCount / 200));
+            return readTime;
+        }
+
+        // Render blog posts
+        function renderPosts(posts) {
+            const grid = document.getElementById('blog-grid');
+            if (!grid) return;
+
+            if (posts.length === 0) {
+                grid.innerHTML = '<div class="no-posts">No posts found.</div>';
+                return;
+            }
+
+            grid.innerHTML = posts.map(post => {
+                const readTime = calculateReadTime(post.content);
+                const date = new Date(post.created_at);
+                const formattedDate = date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                const thumbnail = post.featured_image || 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&h=400&fit=crop&q=80';
+                const excerpt = post.excerpt || post.content.substring(0, 150) + '...';
+
+                return `
+                    <article class="blog-card">
+                        <a href="post.html?id=${post.id}" class="blog-card-link" style="text-decoration: none; color: inherit; display: block;">
+                            <div class="blog-thumbnail" style="background-image: url('${thumbnail}');">
+                                <img src="${thumbnail}" alt="${post.title}" style="display: none;" onerror="this.parentElement.style.background='linear-gradient(135deg, var(--smoke) 0%, var(--light-gray) 100%)'">
+                            </div>
+                            <div class="blog-body">
+                                <div class="blog-meta">
+                                    <span>${formattedDate}</span>
+                                    <span>·</span>
+                                    <span>${readTime} min read</span>
+                                </div>
+                                <h3 class="blog-title">${post.title}</h3>
+                                <p class="blog-excerpt">${excerpt}</p>
+                                <div class="blog-tags">
+                                    ${post.tags.map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        // Load posts from API
+        async function loadPosts(filterTag = null) {
+            const grid = document.getElementById('blog-grid');
+            if (!grid) return;
+
+            try {
+                grid.innerHTML = '<div class="loading-message">Loading posts...</div>';
+
+                console.log('Loading posts from API...', API_URL);
+
+                // Wait for blogManager to be available
+                if (!window.blogManager) {
+                    console.log('Waiting for blogManager to load...');
+                    for (let i = 0; i < 20; i++) {
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                        if (window.blogManager) {
+                            console.log('blogManager loaded successfully');
+                            break;
+                        }
+                    }
+                }
+
+                if (!window.blogManager) {
+                    throw new Error('blogManager is not defined. Failed to load blog.js');
+                }
+
+                // Check if API_URL is accessible first (with longer timeout)
+                try {
+                    const healthController = new AbortController();
+                    const healthTimeout = setTimeout(() => healthController.abort(), 5000); // 5 seconds
+
+                    const healthResponse = await fetch(`${API_URL}/health`, {
+                        method: 'GET',
+                        signal: healthController.signal
+                    });
+                    clearTimeout(healthTimeout);
+                    console.log('Backend health check:', healthResponse.status);
+                } catch (healthError) {
+                    console.warn('Backend health check failed:', healthError);
+
+                    // Only show error if it's a connection error, not just timeout
+                    if (healthError.name === 'AbortError') {
+                        // Timeout - backend might be slow to start
+                        console.warn('Health check timed out, but continuing...');
+                    } else {
+                        // Connection error - backend likely not running
+                        grid.innerHTML = `
+                            <div class="error-message">
+                                <h3>Backend Service Unavailable</h3>
+                                <p>The backend service is not running or cannot be reached.</p>
+                                <p style="margin-top: 16px; font-size: 14px;">Backend should already be running on port 8000</p>
+                            </div>
+                        `;
+                        return;
+                    }
+                }
+
+                const posts = await window.blogManager.getPosts(0, 100, filterTag, true);
+                console.log('Posts loaded:', posts);
+                
+                if (!posts || posts.length === 0) {
+                    console.warn('No posts found in database.');
+                    grid.innerHTML = '<div class="no-posts">No blog posts found. Posts will appear here once they are created.</div>';
+                    return;
+                }
+                
+                allPosts = posts;
+
+                // Apply current filter
+                let filteredPosts = posts;
+                if (currentFilter !== 'all') {
+                    const filterMap = {
+                        'tutorials': ['Tutorial'],
+                        'product-updates': ['Product Update'],
+                        'case-studies': ['Case Study'],
+                        'ai-research': ['AI Research']
+                    };
+                    const filterTags = filterMap[currentFilter] || [];
+                    if (filterTags.length > 0) {
+                        filteredPosts = posts.filter(post => 
+                            post.tags.some(tag => filterTags.includes(tag))
+                        );
+                    }
+                }
+
+                renderPosts(filteredPosts);
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                
+                // Show user-friendly error message
+                let errorMsg = 'Failed to load posts. ';
+                if (error.message.includes('timeout') || error.name === 'AbortError') {
+                    errorMsg += 'Request timed out. Please check if the backend service is running.';
+                } else if (error.message.includes('Cannot connect') || 
+                          error.message.includes('ERR_CONNECTION') ||
+                          error.message.includes('Failed to fetch') ||
+                          error.name === 'TypeError') {
+                    errorMsg = 'Cannot connect to backend server. Please make sure the backend service is running on http://localhost:8000';
+                } else {
+                    errorMsg += error.message;
+                }
+                
+                grid.innerHTML = `
+                    <div class="error-message">
+                        <h3>Error Loading Posts</h3>
+                        <p>${errorMsg}</p>
+                        <p style="margin-top: 16px; font-size: 14px;">Backend should already be running on port 8000 with Supabase database.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Filter functionality
+        function setupFilters() {
+        document.querySelectorAll('.filter-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    currentFilter = filter || 'all';
+                    
+                    loadPosts();
+                });
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupFilters();
+            loadPosts();
+        });
+    </script>
+</body>
+</html>

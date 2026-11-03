@@ -1,0 +1,68 @@
+# ClearMark HTTPS Configuration
+# Original backup: Caddyfile.backup
+
+# Replace with your domain
+# Caddy will automatically obtain and renew Let's Encrypt certificates
+clearmark.example.com {
+    # Enable HTTPS with automatic certificate (Let's Encrypt)
+    # Caddy automatically obtains certificates from Let's Encrypt
+    # No manual configuration needed - just ensure:
+    # 1. Domain DNS points to this server
+    # 2. Ports 80 and 443 are open
+    # 3. EMAIL environment variable is set (optional, for certificate notifications)
+    
+    # Automatic TLS (Let's Encrypt)
+    # Caddy automatically obtains certificates - no configuration needed
+    # Email can be set via EMAIL environment variable
+
+    # API routes
+    handle /api/* {
+        reverse_proxy backend:8000
+    }
+
+    # IOPaint proxy
+    # iopaint-proxy shares network with iopaint, so access via iopaint:5001
+    # (iopaint-proxy port is exposed through iopaint container)
+    # Use handle_path to strip /iopaint prefix before forwarding
+    handle_path /iopaint/* {
+        uri strip_prefix /iopaint
+        reverse_proxy iopaint:5001
+    }
+
+    # Static frontend
+    handle /* {
+        reverse_proxy frontend:80
+    }
+
+    # Security headers
+    header {
+        # Enable HSTS
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        
+        # Prevent clickjacking
+        X-Frame-Options "SAMEORIGIN"
+        
+        # XSS protection
+        X-Content-Type-Options "nosniff"
+        
+        # Referrer policy
+        Referrer-Policy "strict-origin-when-cross-origin"
+        
+        # Content Security Policy
+        # Allow blob: URLs for processed images (created via URL.createObjectURL)
+        Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co https://api.github.com; frame-src 'self' https://*.supabase.co;"
+    }
+
+    # Gzip compression
+    encode gzip zstd
+}
+
+# HTTP to HTTPS redirect
+http://clearmark.example.com {
+    redir https://{host}{uri} permanent
+}
+
+# Local development (without HTTPS)
+localhost:8080 {
+    reverse_proxy frontend:80
+}

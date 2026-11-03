@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Your Email - ClearMark</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>Check Your Email</h1>
+                    <p class="auth-subtitle">We've sent a confirmation link to your email address</p>
+                </div>
+
+                <div class="email-confirm-content">
+                    <div class="email-icon">📧</div>
+                    <p id="emailAddress" class="email-address"></p>
+                    
+                    <div class="confirm-instructions">
+                        <h3>What to do next:</h3>
+                        <ol>
+                            <li>Check your email inbox</li>
+                            <li>Look for an email from ClearMark</li>
+                            <li>Click the confirmation link in the email</li>
+                            <li>Return here and log in</li>
+                        </ol>
+                    </div>
+
+                    <div class="resend-section">
+                        <p>Didn't receive the email?</p>
+                        <button id="resendBtn" class="btn btn-outline">Resend Confirmation Email</button>
+                        <p id="resendMessage" class="auth-message" style="display: none;"></p>
+                    </div>
+
+                    <div class="auth-actions">
+                        <a href="login.html" class="btn btn-primary">Go to Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/common.js"></script>
+    <script src="js/env.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Get email from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get('email');
+        
+        if (email) {
+            document.getElementById('emailAddress').textContent = email;
+        }
+
+        // Resend confirmation email
+        document.getElementById('resendBtn').addEventListener('click', async function() {
+            if (!email) {
+                alert('Email address not found. Please register again.');
+                window.location.href = 'register.html';
+                return;
+            }
+
+            const btn = this;
+            const messageEl = document.getElementById('resendMessage');
+            const originalText = btn.textContent;
+            
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+
+            try {
+                // Initialize auth manager
+                if (typeof window.initAuthManager === 'function') {
+                    window.initAuthManager();
+                }
+
+                // Wait for auth manager
+                let authMgr = window.authManager;
+                if (!authMgr) {
+                    for (let i = 0; i < 10; i++) {
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                        authMgr = window.authManager;
+                        if (authMgr) break;
+                    }
+                }
+
+                if (authMgr && authMgr.resendConfirmationEmail) {
+                    const result = await authMgr.resendConfirmationEmail(email);
+                    
+                    if (result.success) {
+                        messageEl.className = 'auth-message success';
+                        messageEl.textContent = 'Confirmation email sent! Please check your inbox.';
+                        messageEl.style.display = 'block';
+                    } else {
+                        messageEl.className = 'auth-message error';
+                        messageEl.textContent = result.error || 'Failed to resend email.';
+                        messageEl.style.display = 'block';
+                    }
+                } else {
+                    messageEl.className = 'auth-message error';
+                    messageEl.textContent = 'Unable to resend email. Please try registering again.';
+                    messageEl.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error resending email:', error);
+                messageEl.className = 'auth-message error';
+                messageEl.textContent = 'Failed to resend email. Please try again.';
+                messageEl.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = originalText;
+            }
+        });
+    </script>
+</body>
+</html>
+

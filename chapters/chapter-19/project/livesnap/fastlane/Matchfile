@@ -1,0 +1,27 @@
+# Matchfile - Fastlane code signing configuration
+# For more information about match, see:
+#     https://docs.fastlane.tools/actions/match/
+
+# Git repository URL for storing certificates and profiles
+# 请创建一个私有的 Git 仓库来存储证书和配置文件
+git_url("")
+
+# Git branch to use
+git_branch("master")
+
+# App identifier
+app_identifier("com.example.livesnap")
+
+# Username for the git repository
+# username("")
+
+# Type of code signing (appstore, adhoc, development, enterprise)
+# type("appstore")
+
+# Storage mode (git, google_cloud, s3)
+storage_mode("git")
+
+# 如果需要为不同的环境使用不同的配置，可以取消注释
+# for_platform :ios do
+#   app_identifier "com.example.livesnap"
+# end

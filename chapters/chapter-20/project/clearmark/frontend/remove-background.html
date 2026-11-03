@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Background from Photos - ClearMark</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Environment Configuration -->
+    <meta name="supabase-url" content="https://your-project-ref.supabase.co">
+    <meta name="supabase-anon-key" content="your-supabase-anon-key">
+    <!-- Supabase JS (optional - only needed for auth features) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Environment loader -->
+    <script src="js/env.js"></script>
+    <!-- Auth (optional - will fail gracefully if Supabase is unavailable) -->
+    <script src="js/auth.js"></script>
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Remove Background</h1>
+            <p class="subtitle">AI-powered background removal - Instantly remove backgrounds from your photos with precision</p>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon"></div>
+                <h3 class="upload-title">Drag or click to upload image</h3>
+                <p class="upload-subtitle">Support JPG, PNG, WEBP formats, max 10MB</p>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                <button class="upload-button" onclick="document.getElementById('fileInput').click()">Choose File</button>
+            </div>
+        </div>
+
+        <!-- Process Section (Initially Hidden) -->
+        <div class="process-section" id="processSection" style="display: none;">
+            <!-- Image Preview with Action Button -->
+            <div class="image-preview-with-action">
+                <div class="image-preview-container">
+                    <div class="image-container">
+                        <span class="image-label">Original</span>
+                        <img id="originalImage" src="" alt="Original">
+                    </div>
+                </div>
+                
+                <!-- Process Button (Right Side) -->
+                <div class="process-controls-right">
+                    <button class="btn btn-primary btn-process" onclick="processImage()" id="processBtn">
+                        <svg class="btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="3" width="14" height="14" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M6 6 L14 14 M14 6 L6 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.3"/>
+                        </svg>
+                        <span>Remove Background</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Process Status -->
+            <div class="process-status-container" id="processStatusContainer" style="display: none;">
+                <div class="process-status" id="processStatus">
+                    <span class="status-dot"></span>
+                    <span>Processing image...</span>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar" id="progressBar" style="display: none;">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- Comparison View -->
+            <div class="compare-view" id="compareView" style="display: none;">
+                <div class="image-container">
+                    <span class="image-label">Original</span>
+                    <img id="originalImageResult" src="" alt="Original">
+                </div>
+                <div class="image-container">
+                    <span class="image-label">Background Removed</span>
+                    <img id="processedImage" src="" alt="Processed">
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons" id="actionButtons" style="display: none;">
+                <button class="btn btn-outline" onclick="resetUpload()">Upload Again</button>
+                <button class="btn btn-primary" onclick="downloadImage()" id="downloadBtn">Download Image</button>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features">
+            <div class="features-container">
+                <h2 style="text-align: center; font-size: 36px; margin-bottom: 16px;">Smart Background Removal</h2>
+                <p style="text-align: center; color: var(--medium-gray); font-size: 18px; max-width: 600px; margin: 0 auto 48px;">Remove backgrounds from your photos instantly with AI-powered technology</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon-modern">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect x="6" y="6" width="36" height="36" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M18 18 L30 18 M18 24 L30 24 M18 30 L24 30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">One-Click Removal</h3>
+                        <p class="feature-description">Simply upload your image and click to remove the background. No manual selection needed</p>
+                        <div class="feature-stats">
+                            <span class="stat-badge">Automatic</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-modern">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2"/>
+                                <path d="M24 12 V24 L32 32" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Fast Processing</h3>
+                        <p class="feature-description">Process images in seconds with advanced AI algorithms. Get results instantly</p>
+                        <div class="feature-stats">
+                            <span class="stat-badge">&lt;3s</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-modern">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect x="14" y="20" width="20" height="20" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M20 20 V14 C20 10 24 8 28 10" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="24" cy="30" r="2" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">High Quality</h3>
+                        <p class="feature-description">Preserve fine details and edges with precision. Perfect for product photos and portraits</p>
+                        <div class="feature-stats">
+                            <span class="stat-badge">HD Quality</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-modern">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <path d="M12 24 L18 18 L24 24 L30 18 L36 24" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="M12 30 L18 24 L24 30 L30 24 L36 30" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Transparent PNG</h3>
+                        <p class="feature-description">Download images with transparent backgrounds in PNG format, ready for any use case</p>
+                        <div class="feature-stats">
+                            <span class="stat-badge">PNG Export</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-modern">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect x="8" y="8" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <rect x="26" y="8" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <rect x="8" y="26" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <rect x="26" y="26" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M15 15 L15 15 M29 15 L29 15 M15 29 L15 29 M29 29 L29 29" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Batch Processing</h3>
+                        <p class="feature-description">Process multiple images at once. Save time by removing backgrounds from entire photo collections</p>
+                        <div class="feature-stats">
+                            <span class="stat-badge">Multiple Files</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-modern">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect x="12" y="16" width="24" height="20" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M18 20 L24 20 M18 26 L30 26 M18 32 L28 32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="32" cy="20" r="4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M30 20 L34 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Privacy & Security</h3>
+                        <p class="feature-description">Your images are processed securely. We respect your privacy and never store your photos</p>
+                        <div class="feature-stats">
+                            <span class="stat-badge">Secure</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Use Cases Section -->
+                <div class="additional-features">
+                    <h3 style="text-align: center; font-size: 28px; margin: 80px 0 40px;">Perfect For</h3>
+                    <div class="feature-list-grid">
+                        <div class="feature-list-item">
+                            <span class="feature-check">✓</span>
+                            <div>
+                                <strong>Product Photography</strong>
+                                <p>Create professional product images with transparent backgrounds for e-commerce</p>
+                            </div>
+                        </div>
+                        <div class="feature-list-item">
+                            <span class="feature-check">✓</span>
+                            <div>
+                                <strong>Portrait Photos</strong>
+                                <p>Remove backgrounds from portraits for professional headshots and profile pictures</p>
+                            </div>
+                        </div>
+                        <div class="feature-list-item">
+                            <span class="feature-check">✓</span>
+                            <div>
+                                <strong>Social Media</strong>
+                                <p>Create eye-catching content for Instagram, Facebook, and other social platforms</p>
+                            </div>
+                        </div>
+                        <div class="feature-list-item">
+                            <span class="feature-check">✓</span>
+                            <div>
+                                <strong>Graphic Design</strong>
+                                <p>Extract subjects from photos for use in design projects and compositions</p>
+                            </div>
+                        </div>
+                        <div class="feature-list-item">
+                            <span class="feature-check">✓</span>
+                            <div>
+                                <strong>E-commerce</strong>
+                                <p>Create clean product images with white or transparent backgrounds</p>
+                            </div>
+                        </div>
+                        <div class="feature-list-item">
+                            <span class="feature-check">✓</span>
+                            <div>
+                                <strong>Marketing Materials</strong>
+                                <p>Prepare images for brochures, flyers, and promotional materials</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/remove-background.js"></script>
+</body>
+</html>
+

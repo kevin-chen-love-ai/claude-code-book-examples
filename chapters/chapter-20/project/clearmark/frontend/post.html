@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post - ClearMark</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Environment Configuration -->
+    <meta name="supabase-url" content="https://your-project-ref.supabase.co">
+    <meta name="supabase-anon-key" content="your-supabase-anon-key">
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Environment loader -->
+    <script src="js/env.js"></script>
+    <script src="js/auth.js"></script>
+    <!-- Markdown renderer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="blog-detail-container">
+            <!-- Back to Blog -->
+            <div class="blog-detail-nav">
+                <a href="blog.html" class="back-to-blog">
+                    <span>←</span> Back to Blog
+                </a>
+            </div>
+
+            <!-- Loading State -->
+            <div id="post-loading" class="post-loading">
+                <p>Loading post...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="post-error" class="post-error" style="display: none;">
+                <h3>Error Loading Post</h3>
+                <p id="error-message"></p>
+                <a href="blog.html" class="btn btn-primary">Back to Blog</a>
+            </div>
+
+            <!-- Post Content -->
+            <article id="post-content" class="blog-post" style="display: none;">
+                <!-- Post Header -->
+                <header class="blog-post-header">
+                    <div class="blog-post-meta">
+                        <span id="post-date"></span>
+                        <span>·</span>
+                        <span id="post-read-time"></span>
+                        <span id="post-author" style="display: none;">
+                            <span>·</span>
+                            <span>By <span id="post-author-name"></span></span>
+                        </span>
+                    </div>
+                    <h1 id="post-title" class="blog-post-title"></h1>
+                    <div id="post-tags" class="blog-post-tags"></div>
+                </header>
+
+                <!-- Featured Image -->
+                <div id="post-featured-image" class="blog-post-featured-image" style="display: none;">
+                    <img id="featured-img" src="" alt="">
+                </div>
+
+                <!-- Post Body -->
+                <div id="post-body" class="blog-post-body">
+                    <!-- Markdown content will be rendered here -->
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/blog.js"></script>
+    <script>
+        // API_URL is already defined in blog.js, use it directly
+        // const API_URL = window.env?.API_URL || 'http://localhost:8000';
+
+        // Get post ID from URL parameter
+        function getPostIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id') || urlParams.get('post');
+        }
+
+        // Calculate read time
+        function calculateReadTime(content) {
+            const wordCount = content.split(/\s+/).length;
+            return Math.max(1, Math.round(wordCount / 200));
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Load and render post
+        async function loadPost() {
+            const postId = getPostIdFromURL();
+            
+            if (!postId) {
+                showError('Post ID not found in URL');
+                return;
+            }
+
+            const loadingEl = document.getElementById('post-loading');
+            const errorEl = document.getElementById('post-error');
+            const contentEl = document.getElementById('post-content');
+
+            try {
+                loadingEl.style.display = 'block';
+                errorEl.style.display = 'none';
+                contentEl.style.display = 'none';
+
+                console.log('Loading post:', postId);
+
+                // Get post from API
+                const post = await blogManager.getPost(postId);
+                console.log('Post loaded:', post);
+
+                if (!post) {
+                    throw new Error('Post not found');
+                }
+
+                // Update page title
+                document.title = `${post.title} - ClearMark Blog`;
+
+                // Render post header
+                document.getElementById('post-title').textContent = post.title;
+                document.getElementById('post-date').textContent = formatDate(post.created_at);
+                document.getElementById('post-read-time').textContent = `${calculateReadTime(post.content)} min read`;
+
+                // Render author if available
+                if (post.author_name) {
+                    document.getElementById('post-author').style.display = 'inline';
+                    document.getElementById('post-author-name').textContent = post.author_name;
+                }
+
+                // Render tags
+                const tagsEl = document.getElementById('post-tags');
+                if (post.tags && post.tags.length > 0) {
+                    tagsEl.innerHTML = post.tags.map(tag => 
+                        `<span class="blog-tag">${tag}</span>`
+                    ).join('');
+                } else {
+                    tagsEl.innerHTML = '';
+                }
+
+                // Render featured image
+                const featuredImageEl = document.getElementById('post-featured-image');
+                const featuredImgEl = document.getElementById('featured-img');
+                if (post.featured_image) {
+                    featuredImgEl.src = post.featured_image;
+                    featuredImgEl.alt = post.title;
+                    featuredImageEl.style.display = 'block';
+                } else {
+                    featuredImageEl.style.display = 'none';
+                }
+
+                // Render post content (Markdown)
+                const bodyEl = document.getElementById('post-body');
+                if (window.marked) {
+                    // Use marked.js to render Markdown
+                    bodyEl.innerHTML = window.marked.parse(post.content);
+                } else {
+                    // Fallback: basic HTML rendering
+                    bodyEl.innerHTML = blogManager.renderMarkdown(post.content);
+                }
+
+                // Hide loading, show content
+                loadingEl.style.display = 'none';
+                contentEl.style.display = 'block';
+
+            } catch (error) {
+                console.error('Error loading post:', error);
+                showError(error.message || 'Failed to load post');
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            const loadingEl = document.getElementById('post-loading');
+            const errorEl = document.getElementById('post-error');
+            const contentEl = document.getElementById('post-content');
+
+            loadingEl.style.display = 'none';
+            contentEl.style.display = 'none';
+            errorEl.style.display = 'block';
+            document.getElementById('error-message').textContent = message;
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPost();
+        });
+    </script>
+</body>
+</html>
+

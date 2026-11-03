@@ -1,0 +1,20 @@
+# Appfile - Fastlane configuration file
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
+
+# App Bundle Identifier
+app_identifier("com.example.livesnap") # The bundle identifier of your app
+
+# Apple ID (your Apple Developer account email)
+# 请填写你的 Apple ID
+apple_id("") # Your Apple Developer Portal username
+
+# Team ID (可选，如果使用 App Store Connect API Key 则不需要)
+# 可以在 https://developer.apple.com/account 的 Membership 页面找到
+# team_id("") # Your team ID
+
+# 如果需要为不同的环境配置不同的 Bundle ID，可以使用 for_platform
+# for_platform :ios do
+#   app_identifier "com.example.livesnap"
+#   apple_id "your-email@example.com"
+# end

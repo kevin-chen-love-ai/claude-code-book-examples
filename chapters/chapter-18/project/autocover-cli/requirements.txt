@@ -1,0 +1,18 @@
+# Core dependencies (mirrors pyproject.toml)
+pillow>=10.0.0
+numpy>=1.24.0
+openai>=1.0.0
+requests>=2.28.0
+mcp>=1.0.0
+
+# Background removal
+# Lightweight install (no scipy/pymatting):
+#   pip install rembg --no-deps
+#   pip install numpy onnxruntime pooch tqdm jsonschema
+# Full install (better edge quality):
+#   pip install rembg
+rembg>=2.0.50
+onnxruntime>=1.16.0
+
+# Optional: legacy HTML renderer
+# playwright>=1.40.0

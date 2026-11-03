@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autocover-cli"
+version = "0.2.0"
+description = "AI-powered video/social cover generator with Pillow compositor and MCP server"
+requires-python = ">=3.10"
+dependencies = [
+    "pillow>=10.0.0",
+    "numpy>=1.24.0",
+    "openai>=1.0.0",
+    "requests>=2.28.0",
+    "mcp>=1.0.0",
+    "rembg>=2.0.50",
+    "onnxruntime>=1.16.0",
+]
+
+[project.optional-dependencies]
+html = ["playwright>=1.40.0"]   # legacy HTML renderer (optional)
+
+[project.scripts]
+autocover     = "autocover_cli.main:main"
+autocover-mcp = "autocover_cli.mcp_server:main"
+
+[tool.setuptools.packages.find]
+include = ["autocover_cli*"]
+exclude = ["autocover_cli.venv*"]

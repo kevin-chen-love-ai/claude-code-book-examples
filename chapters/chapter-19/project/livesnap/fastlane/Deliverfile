@@ -1,0 +1,36 @@
+# Deliverfile - Fastlane App Store metadata configuration
+# For more information about deliver, see:
+#     https://docs.fastlane.tools/actions/deliver/
+
+# App identifier
+app_identifier("com.example.livesnap")
+
+# App version (optional, will be read from Info.plist if not specified)
+# app_version("1.0")
+
+# Skip metadata upload (if you only want to upload the binary)
+# skip_metadata(false)
+
+# Skip screenshots upload
+# skip_screenshots(false)
+
+# Skip app binary upload (if you only want to upload metadata)
+# skip_binary_upload(false)
+
+# Force overwrite existing metadata
+# force(true)
+
+# Submit for review after upload
+# submit_for_review(false)
+
+# Automatic release after approval
+# automatic_release(false)
+
+# Price tier (0 = free, 1 = $0.99, etc.)
+# price_tier(0)
+
+# Copyright information
+# copyright("© 2025 Livesnap Studio")
+
+# App rating configuration (if needed)
+# app_rating_config_path("./fastlane/metadata/app_rating_config.json")

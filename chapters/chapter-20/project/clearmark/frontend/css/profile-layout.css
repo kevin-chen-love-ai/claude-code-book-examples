@@ -1,0 +1,129 @@
+/* Profile Page Layout with Sidebar */
+
+.profile-layout {
+    display: flex;
+    min-height: calc(100vh - 64px);
+    margin-top: 64px;
+    background: var(--smoke);
+}
+
+.profile-sidebar {
+    width: 220px;
+    background: var(--white);
+    border-right: 1px solid var(--light-gray);
+    padding: 16px 0;
+    position: fixed;
+    left: 0;
+    top: 64px;
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+}
+
+.profile-content-wrapper {
+    flex: 1;
+    margin-left: 220px;
+    padding: 0;
+    width: calc(100% - 220px);
+}
+
+.profile-sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav-item {
+    margin: 0;
+}
+
+.sidebar-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    color: var(--medium-gray);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-nav-link:hover {
+    background: var(--smoke);
+    color: var(--black);
+}
+
+.sidebar-nav-link.active {
+    background: var(--smoke);
+    color: var(--black);
+    border-left-color: var(--black);
+}
+
+.sidebar-nav-icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+.sidebar-nav-link.active .sidebar-nav-icon {
+    opacity: 1;
+}
+
+/* Profile Main Content */
+.profile-main-content {
+    padding: 32px 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.profile-section {
+    display: none;
+}
+
+.profile-section.active {
+    display: block;
+}
+
+.profile-section-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.profile-section-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.profile-section-header p {
+    color: var(--medium-gray);
+    font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-layout {
+        flex-direction: column;
+    }
+
+    .profile-sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--light-gray);
+        top: 64px;
+    }
+
+    .profile-content-wrapper {
+        margin-left: 0;
+    }
+
+    .profile-main-content {
+        padding: 24px;
+    }
+}
+

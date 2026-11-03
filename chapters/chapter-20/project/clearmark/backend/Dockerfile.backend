@@ -1,0 +1,42 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    libffi-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install additional dependencies for FastAPI (including rembg)
+RUN pip install --no-cache-dir \
+    fastapi==0.104.1 \
+    uvicorn[standard]==0.24.0 \
+    python-multipart==0.0.6 \
+    supabase==2.0.0 \
+    redis==5.0.1 \
+    celery==5.3.4 \
+    python-jose[cryptography]==3.3.0 \
+    passlib[bcrypt]==1.7.4 \
+    python-dotenv==1.0.0 \
+    rembg==2.0.50
+
+# Copy application code
+COPY . .
+
+# Create directories
+RUN mkdir -p /app/uploads /app/processed
+
+# Expose port
+EXPOSE 8000
+
+# Run the application
+# For Render: use PORT environment variable, no reload in production
+# For local: use fixed port 8000 with reload
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+

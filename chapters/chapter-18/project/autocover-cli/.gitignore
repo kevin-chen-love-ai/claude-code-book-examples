@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Generated outputs (auto-created at runtime)
+output/
+cache/
+
+# Input working directory (user's own files, not committed)
+input/
+
+# Secrets / config
+.env
+*.env
+
+# macOS
+.DS_Store
+
+# Temp HTML from HTML renderer
+_cover_tmp.html
+
+# Large model weights (rembg downloads these)
+u2net*.onnx

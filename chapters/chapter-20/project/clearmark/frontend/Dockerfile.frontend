@@ -1,0 +1,10 @@
+FROM caddy:2-alpine
+
+# Copy static files (context is already frontend directory)
+COPY . /usr/share/caddy/html/
+
+# Expose port
+EXPOSE 80
+
+CMD ["caddy", "file-server", "--root", "/usr/share/caddy/html", "--listen", ":80"]
+

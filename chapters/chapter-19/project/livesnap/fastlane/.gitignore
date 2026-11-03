@@ -1,0 +1,24 @@
+# Fastlane generated files
+report.xml
+screenshots/
+*.ipa
+*.dSYM.zip
+
+# App Store Connect API Key
+AuthKey_*.p8
+
+# Match certificates (if using match)
+*.cer
+*.p12
+*.mobileprovision
+*.certSigningRequest
+
+# Build artifacts
+build/
+DerivedData/
+
+# Metadata (if storing locally)
+metadata/
+
+# Deliver temporary files
+deliver/
