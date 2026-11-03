@@ -159,7 +159,7 @@ psql -U clearmark -d clearmark < backend/local-db-init.sql
 
 ### Caddy Configuration
 
-Edit `Caddyfile` and replace `yourdomain.com` with your actual domain name for production deployment.
+Edit `Caddyfile` and replace `clearmark.example.com` with your actual domain name for production deployment.
 
 ## API Documentation
 

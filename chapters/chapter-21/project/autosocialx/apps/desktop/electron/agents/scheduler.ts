@@ -1,5 +1,5 @@
 import cron, { type ScheduledTask } from 'node-cron'
-import type { AgentDefinition, AutomationRule, CampaignRecord } from '../agent-core/types'
+import type { AutomationRule, CampaignRecord } from '../agent-core/types'
 import { messageBus } from '../agent-core/message-bus'
 import { executionQueue } from '../agent-core/queue'
 

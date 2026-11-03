@@ -1,5 +1,4 @@
 # ClearMark HTTPS Configuration
-# Original backup: Caddyfile.backup
 
 # Replace with your domain
 # Caddy will automatically obtain and renew Let's Encrypt certificates

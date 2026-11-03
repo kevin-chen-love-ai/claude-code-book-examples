@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 // ─── Tab list ─────────────────────────────────────────────────────────────────
 
 type SettingsTab = 'general' | 'n8n' | 'ai' | 'search' | 'knowledge' | 'rss' | 'mcp' | 'skills' | 'image'
+type KnowledgeDoc = { id: string; title: string; content: string; addedAt: string }
 const getTabsConfig = (t: (key: string) => string): { id: SettingsTab; label: string }[] => [
   { id: 'general', label: t('settings.general.title') },
   { id: 'n8n', label: 'Publish API' },
@@ -146,7 +147,7 @@ export const SettingsPage = () => {
   }
 
   // ── Knowledge (RAG) ─────────────────────────────────────────────────────────
-  const [knowledgeDocs, setKnowledgeDocs] = useState<any[]>([])
+  const [knowledgeDocs, setKnowledgeDocs] = useState<KnowledgeDoc[]>([])
   const [newDocTitle, setNewDocTitle] = useState('')
   const [newDocContent, setNewDocContent] = useState('')
   const [isAddingDoc, setIsAddingDoc] = useState(false)
@@ -701,6 +702,8 @@ export const SettingsPage = () => {
     void loadKnowledgeDocs()
     void loadRssFeeds()
     void loadMcp()
+    // The loader functions intentionally run once to hydrate state from Electron IPC.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Reload tab-specific data every time the user switches to that tab,
@@ -732,6 +735,8 @@ export const SettingsPage = () => {
     } else if (tab === 'skills') {
       void loadSkills()
     }
+    // Loaders are recreated during render but only the active tab should trigger a refresh.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab])
 
   // Debounce RSS items search/filter
@@ -741,6 +746,8 @@ export const SettingsPage = () => {
       void loadRssItems({ search: rssItemsSearch, feedId: rssItemsFeedId })
     }, 300)
     return () => clearTimeout(timer)
+    // Search changes, rather than the loader identity, control this debounce.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rssItemsSearch, rssItemsFeedId, tab])
 
   // ── Skill badge color ─────────────────────────────────────────────────────────
@@ -1587,7 +1594,8 @@ export const SettingsPage = () => {
                           <button
                             onClick={() => setRssItemsExpanded(prev => {
                               const next = new Set(prev)
-                              expanded ? next.delete(item.id) : next.add(item.id)
+                              if (expanded) next.delete(item.id)
+                              else next.add(item.id)
                               return next
                             })}
                             style={{ background: 'none', border: 'none', color: gv.cc, cursor: 'pointer', fontSize: 11, marginLeft: 4, padding: 0 }}

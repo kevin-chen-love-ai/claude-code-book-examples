@@ -332,7 +332,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
             ipcRenderer.removeListener(channel, wrapper as any)
         }
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     off: (_channel: string, _callback: (payload: unknown) => void) => {
         // no-op: use the cleanup function returned by on() instead.
     },

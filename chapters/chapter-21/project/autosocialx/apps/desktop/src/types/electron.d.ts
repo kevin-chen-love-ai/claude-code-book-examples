@@ -65,8 +65,8 @@ export interface ElectronAPI {
     }>
   }
   knowledge: {
-    list: () => Promise<any[]>
-    add: (title: string, content: string) => Promise<any>
+    list: () => Promise<Array<{ id: string; title: string; content: string; addedAt: string }>>
+    add: (title: string, content: string) => Promise<{ id: string; title: string; content: string; addedAt: string }>
     delete: (id: string) => Promise<boolean>
   }
   browser: {

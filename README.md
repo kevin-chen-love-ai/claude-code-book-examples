@@ -60,3 +60,7 @@ python3 scripts/verify_package.py
 ```
 
 项目级构建命令见各章 README。
+
+## 许可证
+
+除另有说明外，本仓库代码采用 MIT License，详见 [LICENSE](LICENSE)。

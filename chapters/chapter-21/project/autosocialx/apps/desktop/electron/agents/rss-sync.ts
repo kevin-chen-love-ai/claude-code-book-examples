@@ -66,15 +66,12 @@ class RssSyncService {
     setIntervalHours(hours: number): void {
         configStore.set('rssSyncIntervalHours', hours)
         this.stop()
-        const started = this.job !== null
-        if (started || true) {
-            this.job = cron.schedule(RssSyncService.hoursToCron(hours), () => {
-                void this.syncNow().then(r =>
-                    console.log(`[RssSync] Cron: +${r.newItems} items, ${r.embeddedItems} embedded, ${r.errors} errors`)
-                )
-            })
-            console.log(`[RssSync] Interval updated → every ${hours}h`)
-        }
+        this.job = cron.schedule(RssSyncService.hoursToCron(hours), () => {
+            void this.syncNow().then(r =>
+                console.log(`[RssSync] Cron: +${r.newItems} items, ${r.embeddedItems} embedded, ${r.errors} errors`)
+            )
+        })
+        console.log(`[RssSync] Interval updated → every ${hours}h`)
     }
 
     stop(): void {
@@ -167,7 +164,6 @@ class RssSyncService {
 
         let totalEmbedded = 0
 
-        // eslint-disable-next-line no-constant-condition
         while (true) {
             const batch = rssVectorStore.getUnembedded(batchSize)
             if (batch.length === 0) break

@@ -165,7 +165,7 @@ export const AnalyticsPage = () => {
                   <span style={{ fontSize: 10, color: gv.td, flexShrink: 0, display: 'flex', alignItems: 'center', gap: 3 }}>
                     <Ic.Clk /> {formatDate(p.status === 'published' ? p.published_at : p.scheduled_at)}
                   </span>
-                  <div style={{ padding: '2px 8px', borderRadius: 6, fontSize: 9, fontWeight: 700, textTransform: 'uppercase', background: p.status === 'published' ? `${gv.gr}20` : p.status === 'queued' ? `${gv.yl}20` : `${gv.ac}20`, color: p.status === 'published' ? gv.gr : p.status === 'queued' ? gv.yl : gv.cc }}>{t(`status.${p.status}` as any, p.status)}</div>
+                  <div style={{ padding: '2px 8px', borderRadius: 6, fontSize: 9, fontWeight: 700, textTransform: 'uppercase', background: p.status === 'published' ? `${gv.gr}20` : p.status === 'queued' ? `${gv.yl}20` : `${gv.ac}20`, color: p.status === 'published' ? gv.gr : p.status === 'queued' ? gv.yl : gv.cc }}>{t(`status.${p.status}`, p.status)}</div>
                 </div>
               ))}
             </div>

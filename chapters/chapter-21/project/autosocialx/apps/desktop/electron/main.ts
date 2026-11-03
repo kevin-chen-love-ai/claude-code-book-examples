@@ -463,7 +463,7 @@ function seedDefaultMCPServers(): void {
     const defaults: Record<string, { command: string; args: string[] }> = {
         'filesystem': {
             command: 'npx',
-            args: ['-y', '@modelcontextprotocol/server-filesystem', require('node:os').homedir()],
+            args: ['-y', '@modelcontextprotocol/server-filesystem', homedir()],
         },
         'fetch': {
             command: 'npx',
@@ -1499,16 +1499,7 @@ ipcMain.handle('content:retry-failed', async () => {
 
 
 
-app.whenReady().then(async () => {
-    // ── Test mode: TEST_GENERATE=1 runs the generate test and exits ─────────
-    if (process.env['TEST_GENERATE']) {
-        initApp()
-        loadSavedLLMKeys()
-        const { runGenerateTest } = await import('../tests/test-generate.js')
-        await runGenerateTest()
-        return
-    }
-
+app.whenReady().then(() => {
     initApp()
     bridgeMessageBus()   // register once — never inside createWindow()
     initAgentLogger()    // start writing run logs to {userData}/logs/

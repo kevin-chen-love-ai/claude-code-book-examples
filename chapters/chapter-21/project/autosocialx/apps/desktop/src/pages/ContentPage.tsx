@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { TFunction } from 'i18next'
 import { Card } from '../components/Card'
 import { Button } from '../components/Button'
 import { Badge, StatusBadge } from '../components/Badge'
@@ -65,7 +66,7 @@ function safeParseJson<T>(s: string | null | undefined, fallback: T): T {
 }
 
 // Need to pass t function to formatTime to handle translations correctly
-function formatTime(unixSec: number | null, t: any): string {
+function formatTime(unixSec: number | null, t: TFunction): string {
   if (!unixSec) return '—'
   const d = new Date(unixSec * 1000)
   const diff = Math.floor((Date.now() - d.getTime()) / 60000)

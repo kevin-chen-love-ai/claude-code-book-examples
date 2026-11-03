@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "concurrently \"vite\" \"npm run build:electron && wait-on http://localhost:5173 && env -u ELECTRON_RUN_AS_NODE VITE_DEV_SERVER_URL=http://localhost:5173 electron .\"",
     "build": "tsc -b && vite build && npm run build:electron && electron-builder",
-    "build:electron": "tsc -p tsconfig.node.json && cp -r dist-electron/electron/. dist-electron/ && mkdir -p dist-electron/db dist-electron/workers && cp -r electron/db/migrations dist-electron/db/ && cp ../python/browser_use_worker.py dist-electron/workers/",
+    "build:electron": "tsc -p tsconfig.node.json && mkdir -p dist-electron/db dist-electron/workers && cp -r electron/db/migrations dist-electron/db/ && cp ../python/browser_use_worker.py dist-electron/workers/",
     "lint": "eslint .",
     "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.node.json --noEmit",
     "preview": "vite preview"

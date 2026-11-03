@@ -261,7 +261,7 @@ export const GeneratePage = () => {
             removeFailed()
             removeScheduled()
         }
-    }, [])  // ← register once; selectedPlatform read via ref
+    }, [t])
 
     const platformAgents = agents.filter(a => a.platform === selectedPlatform)
     const selectedAgent = agents.find(a => a.id === selectedAgentId)

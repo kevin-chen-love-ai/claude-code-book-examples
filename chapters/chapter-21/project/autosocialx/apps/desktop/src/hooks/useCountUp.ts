@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 /**
  * A hook that animates a numeric value from its current state to a target state.
@@ -7,10 +7,11 @@ import { useState, useEffect } from 'react'
  */
 export function useCountUp(end: number, duration: number = 800) {
     const [count, setCount] = useState(0)
+    const countRef = useRef(0)
 
     useEffect(() => {
         let startTime: number | null = null
-        const startValue = count
+        const startValue = countRef.current
 
         const animate = (timestamp: number) => {
             if (!startTime) startTime = timestamp
@@ -20,6 +21,7 @@ export function useCountUp(end: number, duration: number = 800) {
             const easing = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress)
 
             const currentCount = Math.floor(startValue + (end - startValue) * easing)
+            countRef.current = currentCount
             setCount(currentCount)
 
             if (progress < 1) {

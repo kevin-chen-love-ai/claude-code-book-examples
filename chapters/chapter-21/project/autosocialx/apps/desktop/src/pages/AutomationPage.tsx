@@ -161,7 +161,7 @@ const NewRuleModal = ({ agents, onClose, onSaved }: NewRuleModalProps) => {
                 <div style={{ padding: '12px 14px', background: 'rgba(123,92,255,.08)', borderRadius: 10, border: `1px solid ${gv.cc}22` }}>
                   <div style={{ fontSize: 12, fontWeight: 700, marginBottom: 4 }}>{selectedAgent.name}</div>
                   <div style={{ display: 'flex', gap: 14, fontSize: 11, color: gv.td }}>
-                    <span>{t('automation.lbl_status', 'Status')}: <span style={{ color: gv.tx }}>{t(`status_${selectedAgent.status}` as any, selectedAgent.status)}</span></span>
+                    <span>{t('automation.lbl_status', 'Status')}: <span style={{ color: gv.tx }}>{t(`status_${selectedAgent.status}`, selectedAgent.status)}</span></span>
                   </div>
                 </div>
               )}

@@ -2439,11 +2439,6 @@
     {
       "chapter": 21,
       "kind": "project-copy",
-      "path": "chapters/chapter-21/project/autosocialx/design/autosocialx.png"
-    },
-    {
-      "chapter": 21,
-      "kind": "project-copy",
       "path": "chapters/chapter-21/project/autosocialx/docs/ARCHITECTURE.md"
     },
     {

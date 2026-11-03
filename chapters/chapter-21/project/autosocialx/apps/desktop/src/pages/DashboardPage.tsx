@@ -152,7 +152,6 @@ export const DashboardPage = () => {
 
   // Fetch scheduled posts
   useEffect(() => {
-    let timer: ReturnType<typeof setInterval>
     const fetchQueue = async () => {
       const api = getElectronAPI()
       if (!api) return
@@ -162,7 +161,7 @@ export const DashboardPage = () => {
       } catch { /* ignore */ }
     }
     void fetchQueue()
-    timer = setInterval(fetchQueue, 5000)
+    const timer = setInterval(fetchQueue, 5000)
     return () => clearInterval(timer)
   }, [])
 

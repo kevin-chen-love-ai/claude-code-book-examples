@@ -70,7 +70,7 @@ const PAGE_MAP: Record<NavId, () => React.ReactElement> = {
 
 const EditableUserProfile = () => {
   const [isEditing, setIsEditing] = useState(false)
-  const [userName, setUserName] = useState('Alex R.')
+  const [userName, setUserName] = useState('Demo User')
   const [tempName, setTempName] = useState(userName)
 
   const handleSave = () => {

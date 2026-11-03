@@ -19,5 +19,17 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    rules: {
+      '@typescript-eslint/no-unused-vars': ['error', {
+        argsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+      }],
+      'no-constant-condition': ['error', { checkLoops: false }],
+      // This demo keeps reusable log helpers beside the component that uses them.
+      'react-refresh/only-export-components': 'off',
+      // Several pages load Electron IPC state on mount; those effects intentionally
+      // hydrate local UI state after reading the external desktop process.
+      'react-hooks/set-state-in-effect': 'off',
+    },
   },
 ])

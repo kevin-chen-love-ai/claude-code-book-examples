@@ -4,7 +4,7 @@ First off, thank you for considering contributing to AutoSocialX! It's people li
 
 ## Where do I go from here?
 
-If you've noticed a bug or have a feature request, make sure to check our [Issues](https://github.com/example/autosocialx/issues) first to see if someone else has already created a ticket. If not, go ahead and make one!
+If you've noticed a bug or have a feature request, check this repository's Issues page first to see if someone else has already created a ticket. If not, go ahead and make one!
 
 ## Setting up your local environment
 

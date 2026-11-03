@@ -19,9 +19,6 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3B87C4?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-monorepo-1C3D6E?style=flat-square&logo=pnpm&logoColor=white)](https://pnpm.io/)
 
-[![项目动态](https://img.shields.io/badge/项目-动态-000000?style=flat-square)](https://example.com/project-updates)
-[![示例社区](https://img.shields.io/badge/示例社区-加入-5865F2?style=flat-square)](https://example.com/community)
-
 </div>
 
 ---
@@ -56,12 +53,6 @@ AutoSocialX 是一款桌面应用，让 **AI Agent 7×24 小时**全权接管你
 
 ---
 
-## 截图
-
-![AutoSocialX Screenshot](design/autosocialx.png)
-
----
-
 ## 可以自动化的事
 
 | | 能力 | 说明 |
@@ -90,21 +81,15 @@ AutoSocialX 是一款桌面应用，让 **AI Agent 7×24 小时**全权接管你
 ### 1. 启动应用
 
 ```bash
-git clone https://github.com/your-org/autosocialx.git
-cd autosocialx && pnpm install
-cd apps/desktop && pnpm dev
+# 克隆或下载本随书代码仓库后，进入项目目录
+cd chapters/chapter-21/project/autosocialx
+pnpm install
+pnpm dev
 ```
 
 ### 2. 启动 n8n（发布网关）
 
-```bash
-cd n8n && docker-compose up -d
-# 浏览器打开 http://localhost:5678，导入 n8n/workflows/ 中的工作流
-```
-
-已内置两个工作流，直接导入即用：
-- `social_media_autopublish.json` — 连通性测试（空跑，不会真实发布）
-- `social_media_autopublish_official.json` — 正式发布（填入各平台 Token 后启用）
+使用已有或自行部署的 n8n。创建发布工作流后，按照 [`docs/publish API.md`](docs/publish%20API.md) 配置 Webhook URL。本演示仓库不包含 n8n 部署文件和平台凭证。
 
 ### 3. 连接与配置
 
@@ -211,9 +196,8 @@ autosocialx/
 │   │   ├── db/            # SQLite 迁移和数据存取
 │   │   └── skills/        # 内置 SKILL.md 包
 │   └── src/               # 渲染进程 — React 页面、Zustand Store
-├── n8n/                   # Docker Compose + 内置工作流文件
 ├── packages/              # Monorepo 共享包
-└── docs/                  # Logo、截图、架构图
+└── docs/                  # Logo 和架构文档
 ```
 
 ---
@@ -227,13 +211,6 @@ autosocialx/
 
 ---
 
-## 社区与交流
-
-- **项目动态**：[example.com/project-updates](https://example.com/project-updates)
-- **示例社区**：[加入讨论与反馈](https://example.com/community)
-
----
-
 ## 许可证
 
-[MIT](LICENSE) © 2025 AutoSocialX contributors
+[MIT](LICENSE) © 2026 AutoSocialX contributors

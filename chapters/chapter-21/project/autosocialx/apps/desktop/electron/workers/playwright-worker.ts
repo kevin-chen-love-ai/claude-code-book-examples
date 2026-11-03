@@ -67,26 +67,10 @@ const platformAdapters: PlatformAdapterMap = {
 
 type Handler = (params: unknown) => Promise<unknown>
 
-// Strip HTML tags and collapse whitespace, returning clean readable text.
-function htmlToText(html: string): string {
-  return html
-    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
-    .replace(/<!--[\s\S]*?-->/g, '')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&nbsp;/gi, ' ')
-    .replace(/&amp;/gi, '&')
-    .replace(/&lt;/gi, '<')
-    .replace(/&gt;/gi, '>')
-    .replace(/&quot;/gi, '"')
-    .replace(/\s+/g, ' ')
-    .trim()
-}
-
 // Extract main content from HTML, prioritising <article>/<main> over full body
 function extractMainContent(html: string): string {
   // Remove script, style, nav, footer, header, aside blocks entirely
-  let cleaned = html
+  const cleaned = html
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
     .replace(/<nav[^>]*>[\s\S]*?<\/nav>/gi, '')
@@ -215,7 +199,6 @@ function buildHandlers(): Record<string, Handler> {
         await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: 25000 })
 
         // page.evaluate runs inside the browser — cast to any to avoid tsconfig.node.json dom-lib issues
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const results = await page.evaluate((max: number): { title: string; url: string; snippet: string }[] => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const doc = (globalThis as any).document as any
@@ -244,7 +227,6 @@ function buildHandlers(): Record<string, Handler> {
           `https://www.google.com/search?q=${encodeURIComponent(query)}&num=${maxResults * 2}&hl=zh-CN`,
           { waitUntil: 'domcontentloaded', timeout: 25000 },
         )
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const googleResults = await page.evaluate((max: number): { title: string; url: string; snippet: string }[] => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const doc = (globalThis as any).document as any

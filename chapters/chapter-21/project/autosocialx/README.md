@@ -19,9 +19,6 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3B87C4?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![pnpm](https://img.shields.io/badge/pnpm-monorepo-1C3D6E?style=flat-square&logo=pnpm&logoColor=white)](https://pnpm.io/)
 
-[![Project Updates](https://img.shields.io/badge/Project-Updates-000000?style=flat-square)](https://example.com/project-updates)
-[![Community](https://img.shields.io/badge/Community-Join-5865F2?style=flat-square)](https://example.com/community)
-
 </div>
 
 ---
@@ -56,12 +53,6 @@ Set up once, runs forever. No manual posting, no copy-pasting, no missed schedul
 
 ---
 
-## Screenshots
-
-![AutoSocialX Screenshot](design/autosocialx.png)
-
----
-
 ## What You Can Automate
 
 | | Capability | Detail |
@@ -90,21 +81,15 @@ Set up once, runs forever. No manual posting, no copy-pasting, no missed schedul
 ### 1. Run the App
 
 ```bash
-git clone https://github.com/your-org/autosocialx.git
-cd autosocialx && pnpm install
-cd apps/desktop && pnpm dev
+# After cloning or downloading this book-code repository, enter the project directory
+cd chapters/chapter-21/project/autosocialx
+pnpm install
+pnpm dev
 ```
 
 ### 2. Start n8n (Publishing Gateway)
 
-```bash
-cd n8n && docker-compose up -d
-# Open http://localhost:5678 → import workflows from n8n/workflows/
-```
-
-Two ready-to-use workflows are included:
-- `social_media_autopublish.json` — connectivity test (dry-run, no real posts)
-- `social_media_autopublish_official.json` — production publishing (fill in your platform tokens)
+Use an existing or self-hosted n8n instance. Create a publishing workflow, then configure its webhook URL by following [`docs/publish API.md`](docs/publish%20API.md). This demo repository does not include n8n deployment files or platform credentials.
 
 ### 3. Connect & Configure
 
@@ -211,9 +196,8 @@ autosocialx/
 │   │   ├── db/            # SQLite migrations and stores
 │   │   └── skills/        # Built-in SKILL.md bundles
 │   └── src/               # Renderer — React pages, Zustand stores
-├── n8n/                   # Docker Compose + ready-to-use workflow files
 ├── packages/              # Shared monorepo packages
-└── docs/                  # Logo, screenshots, diagrams
+└── docs/                  # Logo and architecture documentation
 ```
 
 ---
@@ -227,13 +211,6 @@ autosocialx/
 
 ---
 
-## Community & Contact
-
-- **Project updates**: [example.com/project-updates](https://example.com/project-updates)
-- **Community**: [Join the example community](https://example.com/community)
-
----
-
 ## License
 
-[MIT](LICENSE) © 2025 AutoSocialX contributors
+[MIT](LICENSE) © 2026 AutoSocialX contributors

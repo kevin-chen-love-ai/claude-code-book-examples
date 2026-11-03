@@ -92,24 +92,24 @@ function QuickSetupModal({ onClose, onCreated }: QuickSetupModalProps) {
         api.personas.list(),
         api.channels.list(),
       ])
+      let loadedPlatforms = new Set<string>()
       if (llmSet.status === 'fulfilled' && Array.isArray(llmSet.value)) {
         const llms = llmSet.value as { key: string; name: string; models: string[] }[]
         setProviders(llms)
         if (llms.length > 0) { setProviderKey(llms[0].key); setModel(llms[0].models[0] ?? '') }
       }
       if (agentSet.status === 'fulfilled' && Array.isArray(agentSet.value)) {
-        const existing = new Set((agentSet.value as { platform: string }[]).map(a => a.platform))
-        setExistingPlatforms(existing)
+        loadedPlatforms = new Set((agentSet.value as { platform: string }[]).map(a => a.platform))
+        setExistingPlatforms(loadedPlatforms)
         // Pre-deselect platforms that already have an agent; will be overridden once channels load
-        setSelected(new Set(PLATFORM_OPTIONS_FALLBACK.map(p => p.value).filter(v => !existing.has(v))))
+        setSelected(new Set(PLATFORM_OPTIONS_FALLBACK.map(p => p.value).filter(v => !loadedPlatforms.has(v))))
       }
       if (chSet.status === 'fulfilled' && Array.isArray(chSet.value)) {
         const enabled = (chSet.value as { platform: string; name: string; enabled: boolean }[]).filter(c => c.enabled)
         if (enabled.length > 0) {
           const opts = enabled.map(c => ({ value: c.platform, label: c.name }))
           setPlatformOptions(opts)
-          const existing = existingPlatforms
-          setSelected(new Set(opts.map(p => p.value).filter(v => !existing.has(v))))
+          setSelected(new Set(opts.map(p => p.value).filter(v => !loadedPlatforms.has(v))))
         }
       }
       if (prSet.status === 'fulfilled' && Array.isArray(prSet.value)) {
@@ -129,7 +129,8 @@ function QuickSetupModal({ onClose, onCreated }: QuickSetupModalProps) {
   const togglePlatform = (p: string) => {
     setSelected(prev => {
       const next = new Set(prev)
-      next.has(p) ? next.delete(p) : next.add(p)
+      if (next.has(p)) next.delete(p)
+      else next.add(p)
       return next
     })
   }
@@ -562,6 +563,8 @@ function EditAgentModal({ agent, onClose, onSaved }: EditAgentModalProps) {
     }
     void load()
     return () => { active = false }
+    // Initial agent values are captured when the modal opens and must not be reloaded.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // run once
 
   // Update model default when provider changes
